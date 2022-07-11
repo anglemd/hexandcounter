@@ -12,7 +12,7 @@ export class UsersService {
   ) {}
 
   async findOneByUserName(userName: string): Promise<UserRecord | null> {
-    console.log('DB lookup for ' + userName);
+    // console.log('DB lookup for ' + userName);
     // this.loggerService.logRecord(userName, userName, LogRecordTypeEnum.LOGIN);
     return this.userModel.findOne({ email: userName }).exec();
   }

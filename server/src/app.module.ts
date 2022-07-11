@@ -29,6 +29,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 })
 export class AppModule {
   constructor() {
-    console.log(process.env.AMD_MONGODB_ATLAS_URI);
+    // console.log(process.env.AMD_MONGODB_ATLAS_URI);
   }
 }

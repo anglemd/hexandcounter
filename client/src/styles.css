@@ -1,1 +1,167 @@
 /* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.content {
+  display: flex;
+  margin: 42px auto 32px;
+  padding: 0 16px;
+  max-width: 960px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.w100 {
+  width: 100%;
+}
+.w90 {
+  width: 90%;
+}
+.w80 {
+  width: 80%;
+}
+
+/* COLORS */
+.oddRow {
+  background-color: #f0f0f0;
+}
+.oddRowBlue {
+  background-color: #eceff1;
+}
+.evenRow {
+  background-color: white;
+}
+.bgDarker {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+.bgDarker2 {
+  background-color: rgba(0, 0, 0, 0.16);
+}
+.bgLighter {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.bgYellow {
+  background-color: #fff3cd !important;
+}
+.bgRed {
+  background-color: #f8d7da !important;
+}
+.bgGreen {
+  background-color: #d4edda !important;
+}
+.bgBlue {
+  background-color: #cce5ff !important;
+}
+.bgMatBlue {
+  background-color: #1976d2 !important;
+}
+.bgBlueTint {
+  background-color: #e9f5ff !important;
+}
+.bgAqua {
+  background-color: #d1ecf1 !important;
+}
+.bgAquax {
+  background-color: #d9edf7 !important;
+}
+.bgWhite {
+  background-color: white !important;
+}
+.bgGray {
+  background-color: #666 !important;
+}
+.bgMedGray {
+  background-color: #888 !important;
+}
+.bgBlack {
+  background-color: black !important;
+}
+
+.fgYellow {
+  color: #856404 !important;
+}
+.fgLightYellow {
+  color: #ffc107 !important;
+} /* for STAR ICONS, etc. */
+.fgWarn {
+  color: #e53935 !important;
+}
+.fgRed {
+  color: #721c24 !important;
+}
+.fgGreen {
+  color: #155724 !important;
+}
+.fgBlue {
+  color: #0c5460 !important;
+}
+.fgAqua {
+  color: #0c5460 !important;
+}
+.fgAquaHover {
+  color: #245269 !important;
+}
+.fgWhite {
+  color: #ffffff !important;
+}
+.fgFormControl {
+  color: #495057 !important;
+} /* TO MATCH FORM CONTROL TEXT */
+.fgGray {
+  color: #666666 !important;
+}
+.fgLightGray {
+  color: #999999 !important;
+}
+.fgFaintGray {
+  color: #bbbbbb !important;
+}
+.fgBlack {
+  color: #000 !important;
+}
+.fgPlaceholder {
+  color: #aaaaaa !important;
+}
+.fgPlaceholderLight {
+  color: #bbbbbb !important;
+}
+.fgVeryLightGray {
+  color: #dddddd !important;
+}
+.fgLabel {
+  color: #666666 !important;
+}
+.fgHeader {
+  color: #555555 !important;
+}
+
+.clickable {
+  cursor: pointer !important;
+}
+.clickableHover {
+  cursor: pointer !important;
+}
+.clickableHover:hover {
+  text-decoration: underline;
+}
+.clickableBlue {
+  cursor: pointer;
+}
+.clickableBlue:hover {
+  color: #0c5460 !important;
+}
+.non-clickable {
+  cursor: default !important;
+}
+.aLink {
+  color: #007bff !important;
+  text-decoration: none;
+  background-color: transparent;
+}

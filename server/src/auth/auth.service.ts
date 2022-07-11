@@ -45,14 +45,13 @@ export class AuthService {
   ): Promise<UserRecord | null> {
     // THE CLIENT SHOULD SEND THE USER NAME AND PW ENCODED, SO WE NEED TO CONVERT TO PLAIN TEXT.
     //TODO: reimplement decoding of email/password coming from client.
-    // let clientPw = this.atob(pass);
-    // let userNm = this.atob(userName);
-    let clientPw = pass;
-    let userNm = userName;
+    let clientPw = this.atob(pass);
+    let userNm = this.atob(userName);
 
     // console.log('AuthService TESTING: ' + userNm + ', ' + clientPw);
     const user: UserRecord = await this.userService.findOneByUserName(userNm);
-    if (user && user.pw /*&& this.decryptString(user.pw) == clientPw */) {
+    // console.log(user);
+    if (user && user.pw && this.decryptString(user.pw) == clientPw) {
       const user2: UserRecord = {
         userName: user.userName,
         displayName: user.displayName,

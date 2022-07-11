@@ -1,0 +1,68 @@
+<mat-card class="mx-4 my-4 pt-1 px-3 mat-elevation-z4" style="max-width: 900px">
+  <div class="row bgBlue p-1 mt-0 mb-4" style="border-radius: 5px">
+    <div class="col-3 pl-5 py-1 fgAqua" style="font-size: 1.25em">Login</div>
+  </div>
+
+  <div class="row mb-2" style="width: 100%">
+    <div class="col-3 text-end pt-1 fgGray">
+      <label for="emailCtrl" (click)="email.focus()"
+        ><span style="min-width: 200px">Email:</span>
+      </label>
+    </div>
+    <div class="col-9">
+      <!-- EMAIL INPUT CONTROL -->
+      <input
+        class="form-control form-control-sm"
+        #email
+        type="text"
+        [formControl]="emailCtrl"
+        [ngStyle]="{
+          'background-color':
+            (emailCtrl.dirty || emailCtrl.touched) && emailCtrl.invalid
+              ? '#FFDDDD'
+              : ''
+        }"
+      />
+      <div
+        style="color: red"
+        *ngIf="(emailCtrl.dirty || emailCtrl.touched) && emailCtrl.invalid"
+      >
+        Valid email required
+      </div>
+    </div>
+    <!-- <div>{{ emailCtrl.errors | json }}</div> -->
+  </div>
+
+  <div class="row mb-2" style="width: 100%">
+    <div class="col-3 text-end pt-1 fgGray">
+      <label for="passCtrl" (click)="pass.focus()">Password: </label>
+    </div>
+    <div class="col-9">
+      <!-- PASSWORD INPUT CONTROL -->
+      <input
+        #pass
+        type="password"
+        class="form-control form-control-sm"
+        [formControl]="passCtrl"
+        [ngStyle]="{
+          'background-color':
+            (passCtrl.dirty || passCtrl.touched) && passCtrl.invalid
+              ? '#FFDDDD'
+              : ''
+        }"
+      />
+      <div
+        style="color: red"
+        *ngIf="(passCtrl.dirty || passCtrl.touched) && passCtrl.invalid"
+      >
+        Password required
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button class="py-1" mat-raised-button color="primary" (click)="login()">
+      Login
+    </button>
+  </div>
+</mat-card>

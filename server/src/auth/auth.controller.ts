@@ -31,7 +31,16 @@ export class AuthController {
     // console.log('Auth Controller login():');
     // console.log(req.user);
     let key = this.authService.login(req.user);
+    // console.log(key);
     return key;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('validate')
+  async validate(@Request() req) {
+    // console.log('======== Auth controller POST /api/auth/validate =====');
+    // console.log(req.user);
+    return req.user;
   }
 
   @Post()

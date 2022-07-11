@@ -22,12 +22,12 @@ import { ConfigModule } from '@nestjs/config';
 })
 export class AuthModule {
   constructor() {
-    console.log('===================');
-    console.log(AuthModule.secretJwtKey);
+    // console.log('===================');
+    // console.log(AuthModule.secretJwtKey);
   }
   public static get secretJwtKey(): string {
     // USE .env FILE TO STORE SECRET KEY...
-    console.log('KEY: ' + process.env.SECRET_KEY);
+    // console.log('KEY: ' + process.env.SECRET_KEY);
     return process.env.SECRET_KEY;
   }
 }
