@@ -1,0 +1,10 @@
+{
+  "/api/**": {
+    "COMMENT": "THIS PROXY IS FOR ACCESSING THE NODE API",
+    "target": "http://localhost:4201/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "https": false
+  }
+}
