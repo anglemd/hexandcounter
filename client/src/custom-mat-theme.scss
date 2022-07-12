@@ -1,0 +1,123 @@
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$candy-app-primary: mat-palette($mat-blue, 700, 300, 900);
+$candy-app-accent: mat-palette($mat-yellow, 800, 400, 900);
+
+// The warn palette is optional (defaults to red).
+$candy-app-warn: mat-palette($mat-red, 600);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$candy-app-theme: mat-light-theme(
+  $candy-app-primary,
+  $candy-app-accent,
+  $candy-app-warn
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($candy-app-theme);
+
+/* Rules for sizing the icon. */
+.material-icons.md-16 {
+  font-size: 16px;
+}
+.material-icons.md-18 {
+  font-size: 18px;
+  max-height: 18px;
+}
+.material-icons.md-20 {
+  font-size: 20px;
+}
+.material-icons.md-24 {
+  font-size: 24px;
+}
+.material-icons.md-36 {
+  font-size: 36px;
+}
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark {
+  color: rgba(0, 0, 0, 0.54);
+}
+.material-icons.md-dark.md-inactive {
+  color: rgba(0, 0, 0, 0.26);
+}
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light {
+  color: rgba(255, 255, 255, 1);
+}
+.material-icons.md-light.md-inactive {
+  color: rgba(255, 255, 255, 0.1);
+}
+
+/*
+<i class="material-icons icon-face md-dark md-inactive md-18">face</i>
+
+  <i class="material-icons p-1 fgRed md-20">check_box</i>
+*/
+.mat-button,
+.mat-raised-button {
+  line-height: inherit !important;
+  min-width: inherit !important;
+}
+.mat-dialog-container {
+  padding: 0px !important;
+  overflow: inherit !important;
+}
+.mat-dialog-title {
+  margin: inherit !important;
+}
+.mat-dialog-actions {
+  min-height: inherit !important;
+  margin-bottom: inherit !important;
+  padding: inherit !important;
+}
+.mat-dialog-content {
+  margin: inherit !important;
+  padding: inherit !important;
+  max-height: inherit !important;
+}
+.mat-autocomplete-panel {
+  max-height: inherit !important;
+  width: inherit !important;
+}
+.mat-option {
+  line-height: inherit !important;
+  height: inherit !important;
+  font-size: inherit !important;
+}
+
+// .mat-form-field-infix{
+//   padding: 0.3em 0 !important;
+// }
+
+// .mat-form-field-subscript-wrapper{
+//   display:none !important;
+// }
+
+// .mat-form-field-wrapper{
+//   padding-bottom: 0px !important;
+// }
+// .mat-form-field-underline{
+//   bottom:inherit !important;
+// }
+
+.mat-tooltip {
+  font-size: 10pt;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 0.3em;
+}

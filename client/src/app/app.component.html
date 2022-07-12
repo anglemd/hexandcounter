@@ -1,2 +1,22 @@
-<div>test</div>
+<mat-toolbar
+  class="bg-dark mat-elevation-z4 fgWhite"
+  style="height: 36px; font: 400 20px Roboto"
+>
+  <span class="">Hex & Counter</span>
+  <span style="flex: 1 1 auto"></span>
+  <div
+    (click)="logout()"
+    style="font-size: 0.75em; cursor: pointer"
+    matTooltip="Click to log out"
+  >
+    {{ userName$ | async }}
+  </div>
+  <mat-icon
+    class="example-icon"
+    aria-hidden="falsße"
+    aria-label="Example user verified icon"
+    >verified_user</mat-icon
+  >
+</mat-toolbar>
+
 <router-outlet></router-outlet>
