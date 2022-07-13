@@ -30,4 +30,10 @@ ng generate component components/login --skip-tests --style none
 ng generate component components/confirm-dialog --skip-tests --style none --module app
 ng generate component components/main --skip-tests --style none --module app
 ng generate component components/game-list --skip-tests --style none --module app
+ng generate component components/canvas --skip-tests --style none --module app
+ng generate component components/toolbar --skip-tests --style none --module app
+ng generate component components/toolbar/game-info --skip-tests --style none --module app
+ng generate component components/toolbar/user-info --skip-tests --style none --module app
+ng generate component components/game --skip-tests --style none --module app
+
 ng generate service services/game --skip-tests

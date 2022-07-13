@@ -18,4 +18,9 @@ export class RouterService {
   public navigateToList() {
     this.router.navigate(['game-list']);
   }
+
+  public navigateToGame(gameId: string) {
+    // console.log('Navigating to game: ' + gameId);
+    this.router.navigate(['game', gameId]);
+  }
 }

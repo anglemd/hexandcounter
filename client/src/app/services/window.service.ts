@@ -70,7 +70,7 @@ export class WindowService {
           prev.width == curr.width && prev.height == curr.height
       ),
       tap((s: Size) => {
-        console.log(s);
+        // console.log(s);
       })
     );
 

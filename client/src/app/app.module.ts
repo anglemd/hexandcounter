@@ -12,9 +12,14 @@ import { AuthGuardService } from './guards/auth-guard';
 import { AuthHttpInterceptor } from './interceptors/auth-http-interceptor';
 import { MainComponent } from './components/main/main.component';
 import { GameListComponent } from './components/game-list/game-list.component';
+import { CanvasComponent } from './components/canvas/canvas.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { GameComponent } from './components/game/game.component';
+import { GameInfoComponent } from './components/toolbar/game-info/game-info.component';
+import { UserInfoComponent } from './components/toolbar/user-info/user-info.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, ConfirmDialogComponent, MainComponent, GameListComponent],
+  declarations: [AppComponent, LoginComponent, ConfirmDialogComponent, MainComponent, GameListComponent, CanvasComponent, ToolbarComponent, GameComponent, GameInfoComponent, UserInfoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

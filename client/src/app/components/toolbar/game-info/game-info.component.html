@@ -1,0 +1,5 @@
+<div *ngIf="bShowInfo">
+  <div *ngIf="currentGame$ | async as game" (click)="navigateToGameList()">
+    {{ game.name }}
+  </div>
+</div>

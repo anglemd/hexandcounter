@@ -12,11 +12,13 @@ import { Game } from '../classes/game/game.class';
 export class GameService {
   private readonly _gameListUrl: string = '/api/games';
 
-  public currentGame: Game | undefined;
+  private currentGame: Game | undefined;
+  public currentGame$: Subject<Game | undefined> = new Subject();
 
   constructor(private httpClient: HttpClient, public router: RouterService) {}
 
   gameGameById$(gameId: string): Observable<Game> {
+    // this.currentGame$.next(undefined);
     return this.httpClient.get(this._gameListUrl + '/' + gameId).pipe(
       take(1),
       catchError((err) => {
@@ -28,7 +30,8 @@ export class GameService {
         return new Game(json);
       }),
       tap((game) => {
-        console.log(game);
+        this.currentGame = game;
+        this.currentGame$.next(game);
       })
     );
   }
@@ -44,7 +47,7 @@ export class GameService {
         return res as IGameJson[];
       }),
       tap((res) => {
-        console.log(res);
+        // console.log(res);
       })
     );
     return req;
