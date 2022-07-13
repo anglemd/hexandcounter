@@ -29,3 +29,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ng generate component components/login --skip-tests --style none
 ng generate component components/confirm-dialog --skip-tests --style none --module app
 ng generate component components/main --skip-tests --style none --module app
+ng generate component components/game-list --skip-tests --style none --module app
+ng generate service services/game --skip-tests
