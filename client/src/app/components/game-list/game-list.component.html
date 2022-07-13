@@ -1,0 +1,8 @@
+<p>game-list works!</p>
+<div
+  *ngFor="let game of gameList$ | async"
+  (click)="onClickGame(game)"
+  class="clickableHover"
+>
+  {{ game.name }}
+</div>

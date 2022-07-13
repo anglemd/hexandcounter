@@ -53,6 +53,7 @@ export class AuthService {
     // console.log(user);
     if (user && user.pw && this.decryptString(user.pw) == clientPw) {
       const user2: UserRecord = {
+        _id: user._id,
         userName: user.userName,
         displayName: user.displayName,
         email: user.email,
@@ -67,10 +68,12 @@ export class AuthService {
     // console.log('----AUTH SERVICE- login');
     // console.log(user);
     const payload = {
+      _id: user._id,
       userName: user.userName,
       displayName: user.displayName,
       email: user.email,
     };
+    console.log(payload);
     return {
       // PROVIDE A JWT TOKEN FOR THE CLIENT APP TO USE...
       access_token: this.jwtService.sign(payload),

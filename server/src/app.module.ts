@@ -7,6 +7,7 @@ import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { GamesModule } from './games/games.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     MongooseModule.forRoot(process.env.AMD_MONGODB_ATLAS_URI),
     AuthModule,
     UsersModule,
+    GamesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

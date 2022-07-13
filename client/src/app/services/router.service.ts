@@ -14,4 +14,8 @@ export class RouterService {
   public navigateToMain() {
     this.router.navigate(['main']);
   }
+
+  public navigateToList() {
+    this.router.navigate(['game-list']);
+  }
 }

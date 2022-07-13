@@ -25,11 +25,12 @@ export class AuthController {
     return 'Auth / is working.';
   }
 
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(LocalAuthGuard) // This AuthGuard will ensure a username and password are submitted that match a UserRecord.
   @Post('login')
   async login(@Request() req) {
     // console.log('Auth Controller login():');
     // console.log(req.user);
+    // console.log(this.authService.btoa('test'));
     let key = this.authService.login(req.user);
     // console.log(key);
     return key;

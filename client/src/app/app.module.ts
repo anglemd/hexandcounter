@@ -11,9 +11,10 @@ import { MaterialModule } from './modules/material.module';
 import { AuthGuardService } from './guards/auth-guard';
 import { AuthHttpInterceptor } from './interceptors/auth-http-interceptor';
 import { MainComponent } from './components/main/main.component';
+import { GameListComponent } from './components/game-list/game-list.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, ConfirmDialogComponent, MainComponent],
+  declarations: [AppComponent, LoginComponent, ConfirmDialogComponent, MainComponent, GameListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

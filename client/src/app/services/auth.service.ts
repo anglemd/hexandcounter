@@ -64,7 +64,7 @@ export class AuthService {
         tap((res: { access_token: string }) => {
           this.sessionToken$ = null; //RESET NOW THAT THE FETCH IS DONE...
           localStorage.setItem('id_token', res.access_token);
-          this.router.navigateToMain();
+          this.router.navigateToList();
         }),
         map((res: { access_token: string }) => {
           if (res.access_token) {

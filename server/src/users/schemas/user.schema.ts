@@ -1,12 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, SchemaTypes, Types } from 'mongoose';
 
 export type UserDocument = UserRecord & Document;
 
 @Schema({ collection: 'users' })
 export class UserRecord {
-  @Prop()
-  _id?: string;
+  @Prop({ type: SchemaTypes.ObjectId })
+  _id?: Types.ObjectId;
 
   @Prop()
   userName: string;
