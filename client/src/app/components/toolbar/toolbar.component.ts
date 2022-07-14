@@ -3,6 +3,7 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { delay } from 'rxjs';
 import { Size } from 'src/app/classes/game/geometry/core/size.class';
 import { LayoutService } from 'src/app/services/layout.service';
+import { WebsocketService } from 'src/app/services/websocket.service';
 import { WindowService } from 'src/app/services/window.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class ToolbarComponent {
 
   constructor(
     private layoutService: LayoutService,
-    private windowService: WindowService
+    private windowService: WindowService,
+    private websocketService: WebsocketService
   ) {
     this.windowService.resize$.pipe(delay(50)).subscribe(() => {
       // LISTEN TO WINDOW RESIZE EVENTS SO WE CAN CHECK OUR SIZE AND NOTIFY THE LAYOUT SERVICE...

@@ -1,13 +1,14 @@
+import { join } from 'path';
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config'; // USES dotenv UNDER THE COVERS...
 import { ServeStaticModule } from '@nestjs/serve-static'; // SERVE STATIC FILES...
-import { join } from 'path';
-import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from './auth/auth.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { UsersModule } from './users/users.module';
 import { GamesModule } from './games/games.module';
+import { WsEventsModule } from './websockets/ws-events.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { GamesModule } from './games/games.module';
     AuthModule,
     UsersModule,
     GamesModule,
+    WsEventsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

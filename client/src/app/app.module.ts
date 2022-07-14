@@ -17,15 +17,38 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { GameComponent } from './components/game/game.component';
 import { GameInfoComponent } from './components/toolbar/game-info/game-info.component';
 import { UserInfoComponent } from './components/toolbar/user-info/user-info.component';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { UnitDesignerComponent } from './components/design/unit-designer/unit-designer.component';
+
+const config: SocketIoConfig = {
+  url: 'ws://' + document.location.host, // use "wss://" if hosted on https....
+  options: {
+    transports: ['websocket'],
+    path: '/wsapi/socket.io',
+  },
+};
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, ConfirmDialogComponent, MainComponent, GameListComponent, CanvasComponent, ToolbarComponent, GameComponent, GameInfoComponent, UserInfoComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    ConfirmDialogComponent,
+    MainComponent,
+    GameListComponent,
+    CanvasComponent,
+    ToolbarComponent,
+    GameComponent,
+    GameInfoComponent,
+    UserInfoComponent,
+    UnitDesignerComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+    SocketIoModule.forRoot(config),
   ],
   providers: [
     // USE A CUSTOM INTERCEPTOR TO ADD JWT TOKEN TO EACH HTTP HEADER...

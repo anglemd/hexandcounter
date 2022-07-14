@@ -6,5 +6,14 @@
     "logLevel": "debug",
     "changeOrigin": true,
     "https": false
+  },
+  "/wsapi/*": {
+    "COMMENT": "THIS IS FOR WEBSOCKETS.  THIS UNIQUE END POINT IS CONFIGURED IN app.module.ts",
+    "target": "ws://localhost:4201/socket.io/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "https": false,
+    "ws": true
   }
 }
