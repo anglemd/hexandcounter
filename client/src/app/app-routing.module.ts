@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UnitDesignerComponent } from './components/design/unit-designer/unit-designer.component';
 import { GameListComponent } from './components/game-list/game-list.component';
 import { GameComponent } from './components/game/game.component';
 import { LoginComponent } from './components/login/login.component';
@@ -21,6 +22,11 @@ const routes: Routes = [
   {
     path: 'main',
     component: MainComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'unit-designer',
+    component: UnitDesignerComponent,
     canActivate: [AuthGuardService],
   },
   { path: '**', redirectTo: '/main' }, // REDIRECT ANY OTHER ROUTES TO SEARCH...

@@ -23,4 +23,9 @@ export class RouterService {
     // console.log('Navigating to game: ' + gameId);
     this.router.navigate(['game', gameId]);
   }
+
+  public navigateToUnitDesigner() {
+    // console.log('Navigating to game: ' + gameId);
+    this.router.navigate(['unit-designer']);
+  }
 }

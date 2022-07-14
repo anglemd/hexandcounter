@@ -25,4 +25,8 @@ export class GameListComponent implements OnInit {
     // console.log(game);
     this.routerService.navigateToGame(game._id || '');
   }
+
+  gotoUnitDesigner() {
+    this.routerService.navigateToUnitDesigner();
+  }
 }

@@ -1,1 +1,37 @@
-<p>unit-designer works!</p>
+<mat-card class="mx-4 my-4 pt-1 px-3 mat-elevation-z4" style="max-width: 900px">
+  <div class="row bgBlue p-1 mt-0 mb-4" style="border-radius: 5px">
+    <div class="row">
+      <div class="col-3">
+        <div class="col-3 pl-5 py-1 fgAqua" style="font-size: 1.15em">
+          Unit&nbsp;Designer:
+        </div>
+      </div>
+      <div class="col-6">
+        <input
+          class="form-control form-control-sm"
+          #searchInput
+          type="text"
+          [formControl]="searchInputCtrl"
+          [ngStyle]="{
+            'background-color':
+              (searchInputCtrl.dirty || searchInputCtrl.touched) &&
+              searchInputCtrl.invalid
+                ? '#FFDDDD'
+                : ''
+          }"
+        />
+      </div>
+      <div class="col-3 px-0">
+        <button mat-raised-button class="px-3 py-1 mt-1">Find</button>
+      </div>
+    </div>
+  </div>
+  <!-- <div
+    *ngFor="let game of gameList$ | async; let odd = odd"
+    (click)="onClickGame(game)"
+    class="clickableHover py-1 px-3"
+    [class.bgDarker]="!odd"
+  >
+    {{ game.name }}
+  </div> -->
+</mat-card>
