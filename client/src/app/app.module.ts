@@ -19,6 +19,7 @@ import { GameInfoComponent } from './components/toolbar/game-info/game-info.comp
 import { UserInfoComponent } from './components/toolbar/user-info/user-info.component';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { UnitDesignerComponent } from './components/design/unit-designer/unit-designer.component';
+import { EditUnitModalComponent } from './components/design/edit-unit-modal/edit-unit-modal.component';
 
 const config: SocketIoConfig = {
   url: 'ws://' + document.location.host, // use "wss://" if hosted on https....
@@ -41,6 +42,7 @@ const config: SocketIoConfig = {
     GameInfoComponent,
     UserInfoComponent,
     UnitDesignerComponent,
+    EditUnitModalComponent,
   ],
   imports: [
     BrowserModule,

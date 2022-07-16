@@ -1,0 +1,36 @@
+<mat-card class="mx-4 my-4 pt-1 px-3 mat-elevation-z4" style="max-width: 900px">
+  <div class="row bgBlue p-1 mt-0 mb-4" style="border-radius: 5px">
+    <div class="row">
+      <div class="col-3">
+        <div class="col-3 pl-5 py-1 fgAqua" style="font-size: 1.15em">Edit&nbsp;Unit:</div>
+      </div>
+      <div class="col-6">
+        <!-- <input
+          class="form-control form-control-sm"
+          #searchInput
+          type="text"
+          [formControl]="searchInputCtrl"
+        /> -->
+      </div>
+      <div class="col-3 px-0"></div>
+    </div>
+  </div>
+  <!-- EDIT CONTROLS -->
+  <div class="row">
+    <div class="col-12">
+      <mat-form-field appearance="fill" class="p-0" #factionMenu>
+        <mat-label>Faction:</mat-label>
+        <mat-select [formControl]="factionCtrl">
+          <mat-option class="py-2" *ngFor="let faction of factionTypes" [value]="faction">{{ faction }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</mat-card>
+<div class="row mb-2 px-3">
+  <div class="col-6"></div>
+  <div class="col-6 text-end">
+    <button mat-raised-button class="px-3 py-2 mx-2" [mat-dialog-close]="cloneJson">OK</button>
+    <button mat-raised-button class="px-3 py-2 mx-2" mat-dialog-close="">Cancel</button>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 export enum FactionEnum {
-  // UNKNOWN = 'UNKNOWN',
+  UNKNOWN = 'UNKNOWN',
   GE = 'GE',
   RU = 'RU',
 }

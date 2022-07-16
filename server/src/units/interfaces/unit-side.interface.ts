@@ -1,4 +1,4 @@
-import { UnitMovementTypesEnum } from 'src/app/enums/units/unit-movement-type.enum';
+import { UnitMovementTypesEnum } from '../enums/unit-movement-type.enum';
 
 export interface IUnitSideJson {
   combatStrength?: number;

@@ -54,3 +54,4 @@ See: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/nodejs-configuration
 
 nest generate resource auth --no-spec
 nest generate resource games --no-spec
+nest generate resource units --no-spec

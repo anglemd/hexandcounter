@@ -1,4 +1,4 @@
-export enum MovementTypesEnum {
+export enum UnitMovementTypesEnum {
   UNKNOWN = 'UNKNOWN',
   TRUCK = 'TRUCK',
   TRACK = 'TRACK',

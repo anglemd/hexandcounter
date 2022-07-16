@@ -9,6 +9,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { GamesModule } from './games/games.module';
 import { WsEventsModule } from './websockets/ws-events.module';
+import { UnitsModule } from './units/units.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { WsEventsModule } from './websockets/ws-events.module';
     UsersModule,
     GamesModule,
     WsEventsModule,
+    UnitsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

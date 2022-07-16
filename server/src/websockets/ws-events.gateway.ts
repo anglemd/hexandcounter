@@ -26,6 +26,10 @@ export class WsEventsGateway
     );
   }
 
+  public registerListener(eventName: string, listener: (Socket, any) => void) {
+    this.io.on(eventName, listener);
+  }
+
   //========
   // THIS WILL BE CALLED WHEN A CLIENT DISCONNECTS:
   handleDisconnect(socket: Socket) {

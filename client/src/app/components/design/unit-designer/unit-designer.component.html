@@ -2,36 +2,35 @@
   <div class="row bgBlue p-1 mt-0 mb-4" style="border-radius: 5px">
     <div class="row">
       <div class="col-3">
-        <div class="col-3 pl-5 py-1 fgAqua" style="font-size: 1.15em">
-          Unit&nbsp;Designer:
-        </div>
+        <div class="col-3 pl-5 py-1 fgAqua" style="font-size: 1.15em">Unit&nbsp;Designer:</div>
       </div>
       <div class="col-6">
-        <input
-          class="form-control form-control-sm"
-          #searchInput
-          type="text"
-          [formControl]="searchInputCtrl"
-          [ngStyle]="{
-            'background-color':
-              (searchInputCtrl.dirty || searchInputCtrl.touched) &&
-              searchInputCtrl.invalid
-                ? '#FFDDDD'
-                : ''
-          }"
-        />
+        <input class="form-control form-control-sm" #searchInput type="text" [formControl]="searchInputCtrl" />
       </div>
       <div class="col-3 px-0">
-        <button mat-raised-button class="px-3 py-1 mt-1">Find</button>
+        <button mat-raised-button class="px-3 py-1 mt-1" (click)="search()">Find</button>
       </div>
     </div>
   </div>
-  <!-- <div
-    *ngFor="let game of gameList$ | async; let odd = odd"
-    (click)="onClickGame(game)"
+  <div class="row fgLightGray">
+    <div class="col-1">Faction</div>
+    <div class="col-3">MarkerId</div>
+    <div class="col-3">Division</div>
+    <div class="col-5">Name</div>
+  </div>
+  <!-- DISPLAY MESSAGE IF NO UNITS FOUND.... -->
+  <div *ngIf="!foundUnits$ || (foundUnits$ | async)?.length == 0">No units</div>
+  <div
+    *ngFor="let unit of foundUnits$ | async; let odd = odd"
     class="clickableHover py-1 px-3"
     [class.bgDarker]="!odd"
+    (click)="editUnitJson(unit)"
   >
-    {{ game.name }}
-  </div> -->
+    <div class="row">
+      <div class="col-1">{{ unit.faction }}</div>
+      <div class="col-3">{{ unit.markerId }}</div>
+      <div class="col-3">{{ unit.division }}</div>
+      <div class="col-5">{{ unit.name }}</div>
+    </div>
+  </div>
 </mat-card>

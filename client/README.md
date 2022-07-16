@@ -36,6 +36,7 @@ ng generate component components/toolbar/game-info --skip-tests --style none --m
 ng generate component components/toolbar/user-info --skip-tests --style none --module app
 ng generate component components/game --skip-tests --style none --module app
 ng generate component components/design/unit-designer --skip-tests --style none --module app
+ng generate component components/design/edit-unit-modal --skip-tests --style none --module app
 
 ng generate service services/game --skip-tests
 ng generate service services/websocket --skip-tests
