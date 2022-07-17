@@ -22,7 +22,7 @@ export class UnitDesignerComponent implements OnInit {
   constructor(private unitService: UnitDesignerService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.searchInputCtrl.setValue('GE');
+    this.searchInputCtrl.setValue('SM.');
     this.search();
   }
 
@@ -42,7 +42,7 @@ export class UnitDesignerComponent implements OnInit {
   editUnitJson(unitJson: IUnitJson) {
     let dialog = this.dialog.open(EditUnitModalComponent, {
       data: unitJson,
-      width: '700px',
+      width: '900px',
       disableClose: false,
       position: { top: '40px' },
     });

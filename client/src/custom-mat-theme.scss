@@ -121,3 +121,8 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 .mat-form-field-flex {
   padding: 0px !important;
 }
+
+.mat-menu-item {
+  height: 2.4em !important;
+  line-height: inherit !important;
+}

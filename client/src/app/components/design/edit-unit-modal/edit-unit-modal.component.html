@@ -2,35 +2,80 @@
   <div class="row bgBlue p-1 mt-0 mb-4" style="border-radius: 5px">
     <div class="row">
       <div class="col-3">
-        <div class="col-3 pl-5 py-1 fgAqua" style="font-size: 1.15em">Edit&nbsp;Unit:</div>
+        <div class="pl-5 py-1 fgAqua" style="font-size: 1.15em">Edit&nbsp;Unit:</div>
       </div>
-      <div class="col-6">
-        <!-- <input
-          class="form-control form-control-sm"
-          #searchInput
-          type="text"
-          [formControl]="searchInputCtrl"
-        /> -->
-      </div>
+      <div class="col-6"></div>
       <div class="col-3 px-0"></div>
     </div>
   </div>
+  <!-- CONTROL LABELS - FIRST ROW -->
+  <div class="row pb-2">
+    <div class="col-2 fgLightGray px-3 labelText">Faction:</div>
+    <div class="col-3 fgLightGray px-3 labelText">Marker Id:</div>
+    <div class="col-2 fgLightGray px-3 labelText">Division:</div>
+    <div class="col-2 fgLightGray px-3 labelText">Name:</div>
+    <div class="col-3 fgLightGray px-3 labelText">Unit type:</div>
+  </div>
   <!-- EDIT CONTROLS -->
   <div class="row">
-    <div class="col-12">
-      <mat-form-field appearance="fill" class="p-0" #factionMenu>
-        <mat-label>Faction:</mat-label>
-        <mat-select [formControl]="factionCtrl">
-          <mat-option class="py-2" *ngFor="let faction of factionTypes" [value]="faction">{{ faction }}</mat-option>
+    <!-- UNIT FACTION CONTROL -->
+    <div class="col-2">
+      <button [mat-menu-trigger-for]="factionMenu" class="btn dropdown-toggle lightBorder w100">
+        {{ cloneJson.faction }}
+      </button>
+      <mat-menu #factionMenu="matMenu">
+        <button
+          style="text-align: left"
+          mat-menu-item
+          *ngFor="let faction of factionTypes"
+          (click)="factionCtrl.setValue(faction); onFactionChange()"
+        >
+          {{ faction }}
+        </button>
+      </mat-menu>
+    </div>
+    <!-- MARKER ID -->
+    <div class="col-3">
+      <input class="form-control" type="text" [formControl]="markerIdCtrl" (blur)="onMarkerIdChange()" />
+    </div>
+    <!-- UNIT DIVISION CONTROL -->
+    <div class="col-2">
+      <button [mat-menu-trigger-for]="divisionMenu" class="btn dropdown-toggle w100 lightBorder">
+        {{ cloneJson.division }}
+      </button>
+      <mat-menu #divisionMenu="matMenu">
+        <button mat-menu-item *ngFor="let divisionName of divisionNames" (click)="onDivisionChange(divisionName)">
+          {{ divisionName }}
+        </button>
+      </mat-menu>
+    </div>
+    <!-- UNIT NAME CONTROL -->
+    <div class="col-2">
+      <input class="form-control" type="text" [formControl]="nameCtrl" (blur)="onNameChange()" />
+    </div>
+    <!-- UNIT TYPE CONTROL -->
+    <div class="col-3">
+      <button [mat-menu-trigger-for]="typeMenu" class="btn dropdown-toggle w100 lightBorder">
+        {{ cloneJson.unitType }}
+      </button>
+      <mat-menu #typeMenu="matMenu">
+        <button mat-menu-item *ngFor="let type of unitTypes" (click)="onTypeChange(type)">
+          {{ type }}
+        </button>
+      </mat-menu>
+      <!-- <mat-form-field appearance="fill" class="p-0" style="display: block">
+        <mat-label>Type:</mat-label>
+        <mat-select [formControl]="typeCtrl" (selectionChange)="onTypeChange()">
+          <mat-option class="py-2" *ngFor="let type of unitTypes" [value]="type">{{ type }}</mat-option>
         </mat-select>
-      </mat-form-field>
+      </mat-form-field> -->
     </div>
   </div>
 </mat-card>
 <div class="row mb-2 px-3">
   <div class="col-6"></div>
   <div class="col-6 text-end">
-    <button mat-raised-button class="px-3 py-2 mx-2" [mat-dialog-close]="cloneJson">OK</button>
+    <button mat-raised-button class="px-4 py-2 mx-2" [mat-dialog-close]="cloneJson">Save</button>
     <button mat-raised-button class="px-3 py-2 mx-2" mat-dialog-close="">Cancel</button>
   </div>
 </div>

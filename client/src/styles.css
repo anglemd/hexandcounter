@@ -166,3 +166,11 @@ body {
   text-decoration: none;
   background-color: transparent;
 }
+
+.lightBorder {
+  border: 1px solid #ced4da !important;
+}
+
+.labelText {
+  font-size: 0.8em;
+}

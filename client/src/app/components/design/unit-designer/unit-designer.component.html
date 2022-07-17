@@ -1,4 +1,4 @@
-<mat-card class="mx-4 my-4 pt-1 px-3 mat-elevation-z4" style="max-width: 900px">
+<mat-card class="mx-4 my-4 pt-1 px-3 mat-elevation-z4" style="max-width: 1800px">
   <div class="row bgBlue p-1 mt-0 mb-4" style="border-radius: 5px">
     <div class="row">
       <div class="col-3">
@@ -14,9 +14,10 @@
   </div>
   <div class="row fgLightGray">
     <div class="col-1">Faction</div>
-    <div class="col-3">MarkerId</div>
-    <div class="col-3">Division</div>
-    <div class="col-5">Name</div>
+    <div class="col-2">MarkerId</div>
+    <div class="col-1">Division</div>
+    <div class="col-1">Name</div>
+    <div class="col-2">Type</div>
   </div>
   <!-- DISPLAY MESSAGE IF NO UNITS FOUND.... -->
   <div *ngIf="!foundUnits$ || (foundUnits$ | async)?.length == 0">No units</div>
@@ -28,9 +29,10 @@
   >
     <div class="row">
       <div class="col-1">{{ unit.faction }}</div>
-      <div class="col-3">{{ unit.markerId }}</div>
-      <div class="col-3">{{ unit.division }}</div>
-      <div class="col-5">{{ unit.name }}</div>
+      <div class="col-2">{{ unit.markerId }}</div>
+      <div class="col-1">{{ unit.division }}</div>
+      <div class="col-1">{{ unit.name }}</div>
+      <div class="col-2">{{ unit.unitType }}</div>
     </div>
   </div>
 </mat-card>
