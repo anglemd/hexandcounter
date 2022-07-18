@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, switchMap, tap } from 'rxjs';
-import { Game } from 'src/app/classes/game/game.class';
+import { Game } from 'src/app/entities/game/game.class';
 import { GameService } from 'src/app/services/game.service';
 
 @Component({

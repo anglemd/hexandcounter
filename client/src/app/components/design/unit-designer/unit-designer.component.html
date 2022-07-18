@@ -13,11 +13,12 @@
     </div>
   </div>
   <div class="row fgLightGray">
-    <div class="col-1">Faction</div>
-    <div class="col-2">MarkerId</div>
-    <div class="col-1">Division</div>
-    <div class="col-1">Name</div>
-    <div class="col-2">Type</div>
+    <div class="col-1"><ng-container *ngTemplateOutlet="label; context: { text: 'Faction:' }"></ng-container></div>
+    <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: 'Marker ID:' }"></ng-container></div>
+    <div class="col-1"><ng-container *ngTemplateOutlet="label; context: { text: 'Division:' }"></ng-container></div>
+    <div class="col-1"><ng-container *ngTemplateOutlet="label; context: { text: 'Name:' }"></ng-container></div>
+    <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: 'Unit Type:' }"></ng-container></div>
+    <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: 'Unit Symbol:' }"></ng-container></div>
   </div>
   <!-- DISPLAY MESSAGE IF NO UNITS FOUND.... -->
   <div *ngIf="!foundUnits$ || (foundUnits$ | async)?.length == 0">No units</div>
@@ -33,6 +34,12 @@
       <div class="col-1">{{ unit.division }}</div>
       <div class="col-1">{{ unit.name }}</div>
       <div class="col-2">{{ unit.unitType }}</div>
+      <div class="col-2">{{ unit.unitAppearance?.unitSymbol }}</div>
     </div>
   </div>
 </mat-card>
+
+<!-- THIS TEMPLATE RENDERS A SMALL FONT LABEL  -->
+<ng-template #label let-text="text">
+  <div class="fgLightGray px-3 labelText">{{ text }}</div>
+</ng-template>

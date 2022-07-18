@@ -57,13 +57,7 @@ export class Rectangle extends AbstractPolygon {
 
   public override containsPoint(p: Point) {
     let contains = false;
-    if (
-      p.x >= this.left &&
-      p.x <= this.right &&
-      p.y >= this.top &&
-      p.y <= this.bottom
-    )
-      contains = true;
+    if (p.x >= this.left && p.x <= this.right && p.y >= this.top && p.y <= this.bottom) contains = true;
     return contains;
   }
 

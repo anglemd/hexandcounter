@@ -1,4 +1,4 @@
-import { IGameJson } from 'src/app/interfaces/game.interface';
+import { IGameJson } from 'src/app/entities/game/game.interface';
 
 export class Game {
   constructor(public json: IGameJson) {}

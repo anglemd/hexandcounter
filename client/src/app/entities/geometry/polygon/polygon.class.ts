@@ -31,9 +31,7 @@ export class Polygon extends AbstractPolygon {
   }
 
   public offsetPolygon(offsetX: number, offsetY: number): Polygon {
-    let vertices = this.vertices.map(
-      (p) => new Point(p.x + offsetX, p.y + offsetY)
-    );
+    let vertices = this.vertices.map((p) => new Point(p.x + offsetX, p.y + offsetY));
     return new Polygon(vertices);
   }
 
@@ -41,14 +39,8 @@ export class Polygon extends AbstractPolygon {
     return new Rectangle(this.bounds.origin, this.bounds.size);
   }
 
-  static offsetPolygon(
-    polygon: Polygon,
-    offsetX: number,
-    offsetY: number
-  ): Polygon {
-    let vertices = polygon.vertices.map(
-      (p) => new Point(p.x + offsetX, p.y + offsetY)
-    );
+  static offsetPolygon(polygon: Polygon, offsetX: number, offsetY: number): Polygon {
+    let vertices = polygon.vertices.map((p) => new Point(p.x + offsetX, p.y + offsetY));
     return new Polygon(vertices);
   }
 
@@ -72,32 +64,20 @@ export class Polygon extends AbstractPolygon {
       newPtY: number;
 
     for (let i = 0; i < N; i++) {
-      mi =
-        (pvArr[(i + 1) % N].y - pvArr[i].y) /
-        (pvArr[(i + 1) % N].x - pvArr[i].x);
-      mi1 =
-        (pvArr[(i + 2) % N].y - pvArr[(i + 1) % N].y) /
-        (pvArr[(i + 2) % N].x - pvArr[(i + 1) % N].x);
+      mi = (pvArr[(i + 1) % N].y - pvArr[i].y) / (pvArr[(i + 1) % N].x - pvArr[i].x);
+      mi1 = (pvArr[(i + 2) % N].y - pvArr[(i + 1) % N].y) / (pvArr[(i + 2) % N].x - pvArr[(i + 1) % N].x);
       li = Math.sqrt(
-        (pvArr[(i + 1) % N].x - pvArr[i].x) *
-          (pvArr[(i + 1) % N].x - pvArr[i].x) +
-          (pvArr[(i + 1) % N].y - pvArr[i].y) *
-            (pvArr[(i + 1) % N].y - pvArr[i].y)
+        (pvArr[(i + 1) % N].x - pvArr[i].x) * (pvArr[(i + 1) % N].x - pvArr[i].x) +
+          (pvArr[(i + 1) % N].y - pvArr[i].y) * (pvArr[(i + 1) % N].y - pvArr[i].y)
       );
       li1 = Math.sqrt(
-        (pvArr[(i + 2) % N].x - pvArr[(i + 1) % N].x) *
-          (pvArr[(i + 2) % N].x - pvArr[(i + 1) % N].x) +
-          (pvArr[(i + 2) % N].y - pvArr[(i + 1) % N].y) *
-            (pvArr[(i + 2) % N].y - pvArr[(i + 1) % N].y)
+        (pvArr[(i + 2) % N].x - pvArr[(i + 1) % N].x) * (pvArr[(i + 2) % N].x - pvArr[(i + 1) % N].x) +
+          (pvArr[(i + 2) % N].y - pvArr[(i + 1) % N].y) * (pvArr[(i + 2) % N].y - pvArr[(i + 1) % N].y)
       );
       ri = pvArr[i].x + (spacing * (pvArr[(i + 1) % N].y - pvArr[i].y)) / li;
-      ri1 =
-        pvArr[(i + 1) % N].x +
-        (spacing * (pvArr[(i + 2) % N].y - pvArr[(i + 1) % N].y)) / li1;
+      ri1 = pvArr[(i + 1) % N].x + (spacing * (pvArr[(i + 2) % N].y - pvArr[(i + 1) % N].y)) / li1;
       si = pvArr[i].y - (spacing * (pvArr[(i + 1) % N].x - pvArr[i].x)) / li;
-      si1 =
-        pvArr[(i + 1) % N].y -
-        (spacing * (pvArr[(i + 2) % N].x - pvArr[(i + 1) % N].x)) / li1;
+      si1 = pvArr[(i + 1) % N].y - (spacing * (pvArr[(i + 2) % N].x - pvArr[(i + 1) % N].x)) / li1;
 
       newPtX = (mi1 * ri1 - mi * ri + si - si1) / (mi1 - mi);
       newPtY = (mi * mi1 * (ri1 - ri) + mi1 * si - mi * si1) / (mi1 - mi);
@@ -105,8 +85,7 @@ export class Polygon extends AbstractPolygon {
       if (pvArr[(i + 1) % N].x - pvArr[i % N].x == 0) {
         newPtX =
           pvArr[(i + 1) % N].x +
-          (spacing * (pvArr[(i + 1) % N].y - pvArr[i % N].y)) /
-            Math.abs(pvArr[(i + 1) % N].y - pvArr[i % N].y);
+          (spacing * (pvArr[(i + 1) % N].y - pvArr[i % N].y)) / Math.abs(pvArr[(i + 1) % N].y - pvArr[i % N].y);
         newPtY = mi1 * newPtX - mi1 * ri1 + si1;
       }
 

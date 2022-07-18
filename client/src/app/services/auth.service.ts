@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { of, Observable, Subject, BehaviorSubject } from 'rxjs';
 import { tap, map, catchError, take } from 'rxjs/operators';
 import { RouterService } from './router.service';
-import { IUserJson } from '../interfaces/user.interface';
+import { IUserJson } from '../entities/users/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -18,9 +18,7 @@ export class AuthService {
   private _sessionToken: string | null = null;
   private sessionToken$: Observable<string | null> | null = null;
 
-  public userNameSubject$: BehaviorSubject<string> = new BehaviorSubject(
-    this._notLoggedIn
-  );
+  public userNameSubject$: BehaviorSubject<string> = new BehaviorSubject(this._notLoggedIn);
 
   constructor(private httpClient: HttpClient, public router: RouterService) {
     this.userNameSubject$.next(this._notLoggedIn);

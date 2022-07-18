@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, fromEvent } from 'rxjs';
 import { map, debounceTime, tap, distinctUntilChanged } from 'rxjs/operators';
-import { Point } from '../classes/game/geometry/core/point.class';
-import { Size } from '../classes/game/geometry/core/size.class';
+import { Point } from '../entities/geometry/core/point.class';
+import { Size } from '../entities/geometry/core/size.class';
 
 // declare var window: any;
 
@@ -23,38 +23,14 @@ export class WindowService {
   public contextMenu$: Observable<Point> | undefined;
   public dblClick$: Observable<Point>;
 
-  public mouseMoveEvt$: Observable<MouseEvent> = fromEvent(
-    window,
-    'mousemove'
-  ) as Observable<MouseEvent>;
-  public mouseDownEvt$: Observable<MouseEvent> = fromEvent(
-    window,
-    'mousedown'
-  ) as Observable<MouseEvent>;
-  public mouseUpEvt$: Observable<MouseEvent> = fromEvent(
-    window,
-    'mouseup'
-  ) as Observable<MouseEvent>;
-  public dblClickEvt$: Observable<MouseEvent> = fromEvent(
-    window,
-    'dblclick'
-  ) as Observable<MouseEvent>;
-  public contextMenuEvt$: Observable<MouseEvent> = fromEvent(
-    window,
-    'contextmenu'
-  ) as Observable<MouseEvent>;
-  public mouseWheelEvt$: Observable<MouseEvent> = fromEvent(
-    window,
-    'wheel'
-  ) as Observable<MouseEvent>;
-  public keyDownEvt$: Observable<KeyboardEvent> = fromEvent(
-    window,
-    'keydown'
-  ) as Observable<KeyboardEvent>;
-  public keyUpEvt$: Observable<KeyboardEvent> = fromEvent(
-    window,
-    'keyup'
-  ) as Observable<KeyboardEvent>;
+  public mouseMoveEvt$: Observable<MouseEvent> = fromEvent(window, 'mousemove') as Observable<MouseEvent>;
+  public mouseDownEvt$: Observable<MouseEvent> = fromEvent(window, 'mousedown') as Observable<MouseEvent>;
+  public mouseUpEvt$: Observable<MouseEvent> = fromEvent(window, 'mouseup') as Observable<MouseEvent>;
+  public dblClickEvt$: Observable<MouseEvent> = fromEvent(window, 'dblclick') as Observable<MouseEvent>;
+  public contextMenuEvt$: Observable<MouseEvent> = fromEvent(window, 'contextmenu') as Observable<MouseEvent>;
+  public mouseWheelEvt$: Observable<MouseEvent> = fromEvent(window, 'wheel') as Observable<MouseEvent>;
+  public keyDownEvt$: Observable<KeyboardEvent> = fromEvent(window, 'keydown') as Observable<KeyboardEvent>;
+  public keyUpEvt$: Observable<KeyboardEvent> = fromEvent(window, 'keyup') as Observable<KeyboardEvent>;
 
   constructor() {
     this.windowSize = new Size(window.innerWidth, window.innerHeight);
@@ -65,10 +41,7 @@ export class WindowService {
         return this.windowSize;
       }),
       debounceTime(this._msThrottleMilliseconds),
-      distinctUntilChanged(
-        (prev: Size, curr: Size) =>
-          prev.width == curr.width && prev.height == curr.height
-      ),
+      distinctUntilChanged((prev: Size, curr: Size) => prev.width == curr.width && prev.height == curr.height),
       tap((s: Size) => {
         // console.log(s);
       })

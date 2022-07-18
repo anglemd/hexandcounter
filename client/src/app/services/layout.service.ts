@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
 import { WindowService } from './window.service';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { Size } from '../classes/game/geometry/core/size.class';
+import { Size } from '../entities/geometry/core/size.class';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LayoutService {
-  private mainAreaSizeBehSubj$: BehaviorSubject<Size> = new BehaviorSubject(
-    new Size(0, 0)
-  );
-  public mainAreaSize$: Observable<Size> =
-    this.mainAreaSizeBehSubj$.asObservable();
+  private mainAreaSizeBehSubj$: BehaviorSubject<Size> = new BehaviorSubject(new Size(0, 0));
+  public mainAreaSize$: Observable<Size> = this.mainAreaSizeBehSubj$.asObservable();
 
   private _navBarHeight: number = 56;
   // private _mainPanelSize:Size = new Size(10,10);
@@ -40,10 +37,7 @@ export class LayoutService {
 
   private calculateMainPanelSize() {
     let winSize = this.windowService.windowSize;
-    let mainPanelSize = new Size(
-      winSize.width,
-      winSize.height - this.navBarHeight
-    );
+    let mainPanelSize = new Size(winSize.width, winSize.height - this.navBarHeight);
     // console.log('Main panel size: ', mainPanelSize);
     this.mainAreaSizeBehSubj$.next(mainPanelSize);
   }

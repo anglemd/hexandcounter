@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { of, Observable, Subject, BehaviorSubject } from 'rxjs';
 import { tap, map, catchError, take } from 'rxjs/operators';
-import { IUnitJson } from 'src/app/interfaces/units/unit.interface';
+import { IUnitJson } from 'src/app/entities/units/unit.interface';
 
 @Injectable({
   providedIn: 'root',

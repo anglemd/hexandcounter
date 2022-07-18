@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatToolbar } from '@angular/material/toolbar';
 import { delay } from 'rxjs';
-import { Size } from 'src/app/classes/game/geometry/core/size.class';
+import { Size } from 'src/app/entities/geometry/core/size.class';
 import { LayoutService } from 'src/app/services/layout.service';
 import { RouterService } from 'src/app/services/router.service';
 import { WebsocketService } from 'src/app/services/websocket.service';
@@ -12,9 +12,7 @@ import { WindowService } from 'src/app/services/window.service';
   templateUrl: './toolbar.component.html',
 })
 export class ToolbarComponent {
-  @ViewChild('oToolbar', { static: true }) matToolbarRef:
-    | MatToolbar
-    | undefined;
+  @ViewChild('oToolbar', { static: true }) matToolbarRef: MatToolbar | undefined;
 
   constructor(
     private layoutService: LayoutService,
@@ -26,8 +24,7 @@ export class ToolbarComponent {
       // LISTEN TO WINDOW RESIZE EVENTS SO WE CAN CHECK OUR SIZE AND NOTIFY THE LAYOUT SERVICE...
       if (this.matToolbarRef) {
         // console.log(this.matToolbarRef._elementRef.nativeElement.clientHeight);
-        this.layoutService.navBarHeight =
-          this.matToolbarRef._elementRef.nativeElement.clientHeight;
+        this.layoutService.navBarHeight = this.matToolbarRef._elementRef.nativeElement.clientHeight;
       }
     });
   }

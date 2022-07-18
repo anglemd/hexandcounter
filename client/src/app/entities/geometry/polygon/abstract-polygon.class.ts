@@ -81,8 +81,7 @@ export abstract class AbstractPolygon {
   public toString(): string {
     let str = 'SHAPE: ';
     this.vertices.forEach((v) => {
-      str +=
-        Math.round(v.x).toString() + ',' + Math.round(v.y).toString() + ': ';
+      str += Math.round(v.x).toString() + ',' + Math.round(v.y).toString() + ': ';
     });
     return str;
   }

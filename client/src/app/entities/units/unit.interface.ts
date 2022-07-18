@@ -1,6 +1,6 @@
-import { FactionEnum } from 'src/app/enums/factions/faction.enum';
-import { UnitSizeEnum } from 'src/app/enums/units/unit-size.enum';
-import { UnitTypeEnum } from 'src/app/enums/units/unit-type.enum';
+import { FactionEnum } from 'src/app/entities/factions/faction.enum';
+import { UnitSizeEnum } from 'src/app/entities/units/unit-size.enum';
+import { UnitTypeEnum } from 'src/app/entities/units/unit-type.enum';
 import { IUnitAppearanceJson } from './unit-appearance.interface';
 import { IUnitSideJson } from './unit-side.interface';
 

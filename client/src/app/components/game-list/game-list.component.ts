@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IGameJson } from 'src/app/interfaces/game.interface';
+import { IGameJson } from 'src/app/entities/game/game.interface';
 import { GameService } from 'src/app/services/game.service';
 import { RouterService } from 'src/app/services/router.service';
 
@@ -12,10 +12,7 @@ export class GameListComponent implements OnInit {
   // USED BY TEMPLATE TO DISPLAY LIST OF GAMES...
   public gameList$: Observable<IGameJson[]> | undefined;
 
-  constructor(
-    private gameService: GameService,
-    private routerService: RouterService
-  ) {}
+  constructor(private gameService: GameService, private routerService: RouterService) {}
 
   ngOnInit(): void {
     this.gameList$ = this.gameService.getGameListForUser$();

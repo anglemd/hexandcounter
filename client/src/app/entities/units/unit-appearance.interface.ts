@@ -1,5 +1,5 @@
-import { ColorEnum } from 'src/app/enums/rendering/color.enum';
-import { UnitSymbolEnum } from 'src/app/enums/units/unit-symbol.enum';
+import { ColorEnum } from '../rendering/color.enum';
+import { UnitSymbolEnum } from './unit-symbol.enum';
 
 export interface IUnitAppearanceJson {
   bgColor?: ColorEnum; // TODO - use COLOR ENUM

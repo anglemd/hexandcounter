@@ -1,7 +1,7 @@
 // SEE:  https://www.rapidtables.com/web/color/RGB_Color.html
 
-import { ColorEnum } from 'src/app/enums/rendering/color.enum';
 import { Util } from '../utility/util.class';
+import { ColorEnum } from './color.enum';
 
 export class CanvasColor {
   static getEnumFromString(color: string | undefined) {
@@ -9,21 +9,13 @@ export class CanvasColor {
     return ColorEnum[color as keyof typeof ColorEnum];
   }
 
-  static setStrokeStyle(
-    ctx: CanvasRenderingContext2D,
-    color: ColorEnum,
-    transparency?: number
-  ) {
+  static setStrokeStyle(ctx: CanvasRenderingContext2D, color: ColorEnum, transparency?: number) {
     if (Util.isNullOrUndefined(transparency)) transparency = 1.0;
     if (!transparency) transparency = 0;
     ctx.strokeStyle = CanvasColor.getRGBA(color, transparency);
   }
 
-  static setFillStyle(
-    ctx: CanvasRenderingContext2D,
-    color: ColorEnum,
-    transparency?: number
-  ) {
+  static setFillStyle(ctx: CanvasRenderingContext2D, color: ColorEnum, transparency?: number) {
     if (Util.isNullOrUndefined(transparency)) transparency = 1.0;
     if (!transparency) transparency = 0;
     ctx.fillStyle = CanvasColor.getRGBA(color, transparency);

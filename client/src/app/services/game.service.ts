@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { of, Observable, Subject, BehaviorSubject } from 'rxjs';
 import { tap, map, catchError, take } from 'rxjs/operators';
 import { RouterService } from './router.service';
-import { IGameJson } from '../interfaces/game.interface';
-import { Game } from '../classes/game/game.class';
+import { IGameJson } from '../entities/game/game.interface';
+import { Game } from '../entities/game/game.class';
 
 @Injectable({
   providedIn: 'root',

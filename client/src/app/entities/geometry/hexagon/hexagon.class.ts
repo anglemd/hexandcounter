@@ -15,20 +15,11 @@ export class Hexagon extends AbstractPolygon {
     this._centerPoint = centerPoint;
     this._hexSize = size;
     this._isFlatTopped = isFlatTopped;
-    this._hexCoord = Hexagon.pixelToHexCoord(
-      this.centerPoint,
-      this.isFlatTopped,
-      this.hexSize
-    );
+    this._hexCoord = Hexagon.pixelToHexCoord(this.centerPoint, this.isFlatTopped, this.hexSize);
     // CREATE VERTICES...
     // for( let i=0; i<6; i++){
     for (let i = 6; i > 0; i--) {
-      let v = Hexagon.getHexCorner(
-        i,
-        this.centerPoint,
-        this.hexSize,
-        this.isFlatTopped
-      );
+      let v = Hexagon.getHexCorner(i, this.centerPoint, this.hexSize, this.isFlatTopped);
       this._verticesArr.push(v);
     }
   }
@@ -80,20 +71,14 @@ export class Hexagon extends AbstractPolygon {
    * @param bShoveOdds
    */
 
-  static createHexAtCoord(
-    hexCoord: HexCoord,
-    hexSize: number,
-    isFlatTopped: boolean
-  ): Hexagon {
+  static createHexAtCoord(hexCoord: HexCoord, hexSize: number, isFlatTopped: boolean): Hexagon {
     let cx = 0; // center point x...
     let cy = 0; // center point y...
     if (isFlatTopped) {
       cx = ((hexSize * 3) / 2) * hexCoord.q;
-      cy =
-        hexSize * ((Math.sqrt(3) / 2) * hexCoord.q + Math.sqrt(3) * hexCoord.r);
+      cy = hexSize * ((Math.sqrt(3) / 2) * hexCoord.q + Math.sqrt(3) * hexCoord.r);
     } else {
-      cx =
-        hexSize * (Math.sqrt(3) * hexCoord.q + (Math.sqrt(3) / 2) * hexCoord.r);
+      cx = hexSize * (Math.sqrt(3) * hexCoord.q + (Math.sqrt(3) / 2) * hexCoord.r);
       cy = ((hexSize * 3) / 2) * hexCoord.r;
     }
     let hex = new Hexagon(new Point(cx, cy), hexSize, isFlatTopped);
@@ -105,11 +90,7 @@ export class Hexagon extends AbstractPolygon {
    * @param grid
    */
   public getHexCoord(): HexCoord {
-    return Hexagon.pixelToHexCoord(
-      this.centerPoint,
-      this.isFlatTopped,
-      this.hexSize
-    );
+    return Hexagon.pixelToHexCoord(this.centerPoint, this.isFlatTopped, this.hexSize);
   }
 
   public getNeighborHexCoordByDirection(direction: number): HexCoord {
@@ -128,12 +109,7 @@ export class Hexagon extends AbstractPolygon {
    * For the given center point, calculate the position of the hexagon corner at index i
    * Used during initialization to determine the 6 vertices for this hexagon.
    */
-  static getHexCorner(
-    vertexIndex: number,
-    centerPt: Point,
-    hexSize: number,
-    isFlatTopped: boolean
-  ): Point {
+  static getHexCorner(vertexIndex: number, centerPt: Point, hexSize: number, isFlatTopped: boolean): Point {
     let angle_deg = 60 * vertexIndex;
     if (!isFlatTopped) angle_deg += 30;
     let angle_rad = (Math.PI / 180) * angle_deg;
@@ -160,11 +136,7 @@ export class Hexagon extends AbstractPolygon {
     return minDir;
   }
 
-  static pixelToHexCoord = (
-    point: Point,
-    isFlatTopped: boolean,
-    hexSize: number
-  ): HexCoord => {
+  static pixelToHexCoord = (point: Point, isFlatTopped: boolean, hexSize: number): HexCoord => {
     if (isFlatTopped) {
       let hc: HexCoord = Hexagon.pixel_to_flat_hex(point, hexSize);
       return hc;
@@ -233,10 +205,7 @@ export class Hexagon extends AbstractPolygon {
     let aCube = Hexagon.axial_to_cube(aCoord);
     let bCoord: HexCoord = b.getHexCoord();
     let bCube = Hexagon.axial_to_cube(bCoord);
-    let aa =
-      Math.abs(aCube.x - bCube.x) +
-      Math.abs(aCube.y - bCube.y) +
-      Math.abs(aCube.z - bCube.z);
+    let aa = Math.abs(aCube.x - bCube.x) + Math.abs(aCube.y - bCube.y) + Math.abs(aCube.z - bCube.z);
     return aa / 2;
   }
 } // end class

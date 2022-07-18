@@ -4,8 +4,8 @@ export interface IUnitSideJson {
   combatStrength?: number;
   barrageStrength?: number;
   actionRating?: number; //action rating
-  movementType?: UnitMovementTypesEnum;
   movementPoints?: number;
-  throwRange?: number;
-  transportCapacity?: number;
+  movementType?: UnitMovementTypesEnum;
+  range?: number;
+  transportPoints?: number;
 }

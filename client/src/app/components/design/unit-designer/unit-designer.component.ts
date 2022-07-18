@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { catchError, map, Observable } from 'rxjs';
-import { IUnitJson } from 'src/app/interfaces/units/unit.interface';
 import { UnitDesignerService } from 'src/app/services/design/unit-designer.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUnitModalComponent } from '../edit-unit-modal/edit-unit-modal.component';
+import { IUnitJson } from 'src/app/entities/units/unit.interface';
 
 @Component({
   selector: 'app-unit-designer',

@@ -51,6 +51,24 @@
       ></ng-container>
     </div>
   </div>
+  <!-- LABELS - SECOND ROW -->
+  <!-- LABELS - SECOND ROW -->
+  <div class="row pb-2 mt-3">
+    <div class="col-4"><ng-container *ngTemplateOutlet="label; context: { text: 'Symbol:' }"></ng-container></div>
+    <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
+    <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
+    <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <ng-container
+        *ngTemplateOutlet="enum_select; context: { unit_property: 'unitSymbol', enum_list: symbolTypes }"
+      ></ng-container>
+    </div>
+    <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
+    <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
+    <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
+  </div>
   <!-- END CONTROLS FOR LINE ONE -->
 </mat-card>
 
@@ -66,7 +84,7 @@
 <!-- THIS TEMPLATE RENDERS A SELECTION OF ITEMS TO STORE IN UNIT.[unit_property] -->
 <ng-template #enum_select let-unit_property="unit_property" let-enum_list="enum_list">
   <button [mat-menu-trigger-for]="menu" class="btn dropdown-toggle w100 lightBorder">
-    {{ unitProperty(unit_property) }}
+    {{ unitProperty(unit_property) }}{{ unitApprearanceProperty(unit_property) }}
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item *ngFor="let item of enum_list" (click)="onChangeUnitProperty(unit_property, item)">
