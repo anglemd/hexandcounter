@@ -65,4 +65,22 @@ export class EditUnitModalComponent implements OnInit {
     // console.log(this.divisionCtrl.value);
     this.cloneJson.division = this.divisionCtrl.value || '';
   }
+
+  onChangeUnitProperty(prop: 'faction' | 'division' | 'unitType', newValue: string) {
+    console.log(prop, newValue);
+    if (prop == 'faction') {
+      this.factionCtrl.setValue(newValue);
+      this.cloneJson.faction = this.factionTypes.find((item) => item == newValue);
+    } else if (prop == 'division') {
+      this.divisionCtrl.setValue(newValue);
+      this.cloneJson.division = this.divisionNames.find((item) => item == newValue);
+    } else if (prop == 'unitType') {
+      this.typeCtrl.setValue(newValue);
+      this.cloneJson.unitType = this.unitTypes.find((item) => item == newValue);
+    }
+  }
+
+  unitProperty(prop: 'faction' | 'division' | 'unitType') {
+    return this.cloneJson[prop];
+  }
 }
