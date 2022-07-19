@@ -73,7 +73,50 @@
     <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
     <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
   </div>
-  <!-- END CONTROLS FOR LINE ONE -->
+  <!-- END CONTROLS FOR LINE ONE  -->
+  <div class="row mt-3">
+    <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showCombatStrength">
+      <ng-container *ngTemplateOutlet="label; context: { text: 'CS:' }"></ng-container>
+    </div>
+    <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showActionRating">
+      <ng-container *ngTemplateOutlet="label; context: { text: 'AR:' }"></ng-container>
+    </div>
+    <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showMovementRating">
+      <ng-container *ngTemplateOutlet="label; context: { text: 'MP:' }"></ng-container>
+    </div>
+    <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showMovementRating">
+      <ng-container *ngTemplateOutlet="label; context: { text: 'MType:' }"></ng-container>
+    </div>
+    <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: 'xx:' }"></ng-container></div>
+    <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: 'xx:' }"></ng-container></div>
+  </div>
+  <div *ngFor="let sideEditor of unitEditor.sideEditors">
+    <div class="row pt-2">
+      <div class="col-2" *ngIf="sideEditor.showCombatStrength">
+        <input type="number" class="form-control" [(ngModel)]="sideEditor.combatStrength" />
+      </div>
+      <div class="col-2" *ngIf="sideEditor.showActionRating">
+        <input type="number" class="form-control" [(ngModel)]="sideEditor.actionRating" />
+      </div>
+      <div class="col-2" *ngIf="sideEditor.showMovementRating">
+        <input type="number" class="form-control" [(ngModel)]="sideEditor.movementPoints" />
+      </div>
+      <div class="col-2" *ngIf="sideEditor.showMovementRating">
+        <button [mat-menu-trigger-for]="menu" class="btn dropdown-toggle w100 lightBorder">
+          {{ sideEditor.movementType }}
+        </button>
+        <mat-menu #menu="matMenu">
+          <button
+            mat-menu-item
+            *ngFor="let moveType of UnitEditor.unitMovementTypesEnumStrings"
+            (click)="sideEditor.movementType = moveType"
+          >
+            {{ moveType }}
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
 </mat-card>
 
 <!-- DIALOG BUTTONS -->

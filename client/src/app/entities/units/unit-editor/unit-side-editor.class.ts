@@ -1,5 +1,6 @@
 import { UnitMovementTypesEnum } from '../unit-movement-type.enum';
 import { IUnitSideJson } from '../unit-side.interface';
+import { UnitTypeEnum } from '../unit-type.enum';
 import { UnitEditor } from './unit-editor.class';
 
 export class UnitSideEditor {
@@ -106,6 +107,7 @@ export class UnitSideEditor {
   }
 
   public set movementType(newVal: string) {
+    console.log(newVal);
     this._json.movementType = UnitEditor.unitMovementTypesEnumStrings.find((item) => item == newVal);
     if (this._sideIndex == 0 && this._parent.sideCount == 2 && this._parent.sideEditors[1]) {
       let flipSide = this._parent.sideEditors[1];
@@ -118,6 +120,23 @@ export class UnitSideEditor {
   public get json(): IUnitSideJson {
     return JSON.parse(JSON.stringify(this._json));
   }
+
+  public get showCombatStrength(): boolean {
+    return this._parent.unitType == UnitTypeEnum.COMBAT_UNIT;
+  }
+  public get showActionRating(): boolean {
+    return this._parent.unitType == UnitTypeEnum.COMBAT_UNIT || this._parent.unitType == UnitTypeEnum.ARTILLARY_UNIT;
+  }
+
+  public get showMovementRating(): boolean {
+    let uType = this._parent.unitType;
+    return (
+      uType == UnitTypeEnum.COMBAT_UNIT ||
+      uType == UnitTypeEnum.ARTILLARY_UNIT ||
+      uType == UnitTypeEnum.GROUND_TRANSPORT ||
+      uType == UnitTypeEnum.HQ
+    );
+  }
 }
 
 /*
@@ -128,5 +147,31 @@ export class UnitSideEditor {
   barrageStrength?: number;
   range?: number;
   transportPoints?: number;
+
+  COMBAT_UNIT: 
+combatStrength
+actionRating
+movementPoints
+movementType
+
+ARTILLARY_UNIT
+barrageStrength?: number;
+range
+actionRating
+movementPoints
+movementType
+
+TRANSPORT_TRUCK | TRANSPORT_WAGON
+movementPoints
+movementType
+transportPoints?: number;
+
+SUPPLY_DUMP
+<none>
+
+HQ
+range
+movementPoints
+movementType
 
 */

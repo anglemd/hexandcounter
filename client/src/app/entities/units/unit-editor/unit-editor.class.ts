@@ -14,6 +14,7 @@ export class UnitEditor {
   public static unitSizeEnumStrings = Object.values(UnitSizeEnum);
   public static unitTypeEnumStrings = Object.values(UnitTypeEnum);
   public static unitMovementTypesEnumStrings = Object.values(UnitMovementTypesEnum);
+
   public static unitSymbolEnumStrings = Object.values(UnitSymbolEnum);
   public static colorEnumStrings = Object.values(ColorEnum);
   public static divisionNames: Array<string> = ['', '3.Pz', '4.Pz', '7.Pz', '10.Pz'];
@@ -26,6 +27,11 @@ export class UnitEditor {
     // if (!this.json.unitAppearance) this.json.unitAppearance = {};
     this.unitAppearanceEditor = new UnitAppearanceEditor(this);
     if (!this.json.unitSides) this.json.unitSides = [];
+    this.syncSideEditors();
+  }
+
+  public static get UnitTypeEnum(): typeof UnitTypeEnum {
+    return UnitTypeEnum;
   }
 
   private syncSideEditors() {
