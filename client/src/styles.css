@@ -39,10 +39,10 @@ body {
   background-color: white;
 }
 .bgDarker {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: rgba(0, 0, 0, 0.04) !important;
 }
 .bgDarker2 {
-  background-color: rgba(0, 0, 0, 0.16);
+  background-color: rgba(0, 0, 0, 0.16) !important;
 }
 .bgLighter {
   background-color: rgba(255, 255, 255, 0.04);

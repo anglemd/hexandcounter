@@ -89,7 +89,12 @@
 <ng-template #enum_select let-form_control="form_control" let-enum_list="enum_list">
   <button [mat-menu-trigger-for]="menu" class="btn dropdown-toggle w100 lightBorder">{{ form_control.value }}</button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item *ngFor="let enum_item of enum_list" (click)="onChangeUnitProperty(form_control, enum_item)">
+    <button
+      mat-menu-item
+      *ngFor="let enum_item of enum_list"
+      (click)="onChangeUnitProperty(form_control, enum_item)"
+      style="height: 24px !important; line-height: 24px !important"
+    >
       {{ enum_item }}
     </button>
   </mat-menu>

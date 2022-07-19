@@ -4,11 +4,14 @@
       <div class="col-3">
         <div class="col-3 pl-5 py-1 fgAqua" style="font-size: 1.15em">Unit&nbsp;Designer:</div>
       </div>
-      <div class="col-6">
+      <div class="col-5">
         <input class="form-control form-control-sm" #searchInput type="text" [formControl]="searchInputCtrl" />
       </div>
-      <div class="col-3 px-0">
+      <div class="col-2 px-0">
         <button mat-raised-button class="px-3 py-1 mt-1" (click)="search()">Find</button>
+      </div>
+      <div class="col-2 px-0 text-end">
+        <button mat-raised-button class="px-3 py-1 mt-1 bgDarker2" (click)="createNewUnit()">Create unit</button>
       </div>
     </div>
   </div>
@@ -22,6 +25,7 @@
   </div>
   <!-- DISPLAY MESSAGE IF NO UNITS FOUND.... -->
   <div *ngIf="!foundUnits$ || (foundUnits$ | async)?.length == 0">No units</div>
+  <!-- DISPLAY LIST OF FOUND UNITS -->
   <div
     *ngFor="let unit of foundUnits$ | async; let odd = odd"
     class="clickableHover py-1 px-3"

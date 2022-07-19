@@ -13,7 +13,11 @@ export class UnitsService {
     private readonly unitModel: Model<UnitDocument>,
   ) {}
   create(createUnitDto: IUnitJson) {
-    return 'This action adds a new unit';
+    let unit = new this.unitModel(createUnitDto);
+    unit._id = new Types.ObjectId();
+    console.log('CREATE UNIT:');
+    console.log(unit);
+    return unit.save();
   }
 
   findAll() {

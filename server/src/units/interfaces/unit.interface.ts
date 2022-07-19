@@ -6,7 +6,7 @@ import { IUnitSideJson } from './unit-side.interface';
 import { IUnitAppearanceJson } from './unit.appearance';
 
 export interface IUnitJson {
-  _id?: Types.ObjectId;
+  _id: Types.ObjectId;
   markerId: string;
   maxSteps?: number;
   unitSize?: UnitSizeEnum;

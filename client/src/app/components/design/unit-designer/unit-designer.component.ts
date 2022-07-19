@@ -39,6 +39,11 @@ export class UnitDesignerComponent implements OnInit {
     );
   }
 
+  createNewUnit() {
+    let unit: IUnitJson = { markerId: 'SM.XX.XX.XX' };
+    this.editUnitJson(unit);
+  }
+
   editUnitJson(unitJson: IUnitJson) {
     let dialog = this.dialog.open(EditUnitModalComponent, {
       data: unitJson,
@@ -54,7 +59,16 @@ export class UnitDesignerComponent implements OnInit {
     console.log(unitJson);
     //TODO: dave unit to database...
     if (unitJson._id) {
+      // existing...
       this.unitService.saveUnitEdits$(unitJson._id, unitJson).subscribe((res) => {
+        console.log(res);
+        this.search();
+      });
+    } else {
+      // new unit...
+      console.log('NEW UNIT');
+      console.log(unitJson);
+      this.unitService.createNewUnit$(unitJson).subscribe((res) => {
         console.log(res);
         this.search();
       });

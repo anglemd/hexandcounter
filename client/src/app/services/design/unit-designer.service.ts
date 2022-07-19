@@ -21,4 +21,8 @@ export class UnitDesignerService {
   saveUnitEdits$(id: string, unitJson: IUnitJson) {
     return this.http.patch('api/units/' + id, unitJson);
   }
+
+  createNewUnit$(unitJson: IUnitJson) {
+    return this.http.post('api/units', unitJson);
+  }
 }

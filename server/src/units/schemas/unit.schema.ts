@@ -12,7 +12,7 @@ export type UnitDocument = UnitRecord & Document;
 @Schema({ collection: 'units' })
 export class UnitRecord implements IUnitJson {
   @Prop({ type: SchemaTypes.ObjectId })
-  _id?: Types.ObjectId;
+  _id: Types.ObjectId;
 
   @Prop()
   markerId: string;
