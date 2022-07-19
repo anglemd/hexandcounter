@@ -21,36 +21,37 @@
     <!-- UNIT FACTION CONTROL -->
     <div class="col-2">
       <ng-container
-        *ngTemplateOutlet="enum_select; context: { unit_property: 'faction', enum_list: factionTypes }"
+        *ngTemplateOutlet="
+          enum_select;
+          context: { form_control: factionCtrl, enum_list: UnitEditor.factionEnumStrings }
+        "
       ></ng-container>
     </div>
     <!-- MARKER ID -->
     <div class="col-3">
-      <ng-container
-        *ngTemplateOutlet="text_input; context: { blur: onMarkerIdChange(), form_control: markerIdCtrl }"
-      ></ng-container>
+      <ng-container *ngTemplateOutlet="text_input; context: { form_control: markerIdCtrl }"></ng-container>
     </div>
     <!-- UNIT DIVISION CONTROL -->
     <div class="col-2">
       <ng-container
-        *ngTemplateOutlet="enum_select; context: { unit_property: 'division', enum_list: divisionNames }"
+        *ngTemplateOutlet="enum_select; context: { form_control: divisionCtrl, enum_list: UnitEditor.divisionNames }"
       ></ng-container>
     </div>
 
     <!-- UNIT NAME CONTROL -->
     <div class="col-2">
-      <ng-container
-        *ngTemplateOutlet="text_input; context: { blur: onNameChange(), form_control: nameCtrl }"
-      ></ng-container>
+      <ng-container *ngTemplateOutlet="text_input; context: { form_control: nameCtrl }"></ng-container>
     </div>
 
     <!-- UNIT TYPE CONTROL -->
     <div class="col-3">
       <ng-container
-        *ngTemplateOutlet="enum_select; context: { unit_property: 'unitType', enum_list: unitTypes }"
+        *ngTemplateOutlet="enum_select; context: { form_control: typeCtrl, enum_list: UnitEditor.unitTypeEnumStrings }"
       ></ng-container>
     </div>
   </div>
+  <!-- end first row of controls -->
+
   <!-- LABELS - SECOND ROW -->
   <!-- LABELS - SECOND ROW -->
   <div class="row pb-2 mt-3">
@@ -62,7 +63,10 @@
   <div class="row">
     <div class="col-4">
       <ng-container
-        *ngTemplateOutlet="enum_select; context: { unit_property: 'unitSymbol', enum_list: symbolTypes }"
+        *ngTemplateOutlet="
+          enum_select;
+          context: { form_control: symbolCtrl, enum_list: UnitEditor.unitSymbolEnumStrings }
+        "
       ></ng-container>
     </div>
     <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
@@ -81,23 +85,21 @@
   </div>
 </div>
 
-<!-- THIS TEMPLATE RENDERS A SELECTION OF ITEMS TO STORE IN UNIT.[unit_property] -->
-<ng-template #enum_select let-unit_property="unit_property" let-enum_list="enum_list">
-  <button [mat-menu-trigger-for]="menu" class="btn dropdown-toggle w100 lightBorder">
-    {{ unitProperty(unit_property) }}{{ unitApprearanceProperty(unit_property) }}
-  </button>
+<!-- THIS TEMPLATE <enum_select> RENDERS A SELECTION OF ITEMS TO STORE IN UNIT. -->
+<ng-template #enum_select let-form_control="form_control" let-enum_list="enum_list">
+  <button [mat-menu-trigger-for]="menu" class="btn dropdown-toggle w100 lightBorder">{{ form_control.value }}</button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item *ngFor="let item of enum_list" (click)="onChangeUnitProperty(unit_property, item)">
-      {{ item }}
+    <button mat-menu-item *ngFor="let enum_item of enum_list" (click)="onChangeUnitProperty(form_control, enum_item)">
+      {{ enum_item }}
     </button>
   </mat-menu>
 </ng-template>
 
 <!-- THIS TEMPLATE RENDERS A TEXT INPUT TO STORE TEXT IN UNIT.[unit_property] -->
-<ng-template #text_input let-blur="blur" let-form_control="form_control">
-  <input class="form-control" type="text" [formControl]="form_control" (blur)="(blur)" />
-  <!-- <input class="form-control" type="text" [formControl]="markerIdCtrl" (blur)="onMarkerIdChange()" /> -->
+<ng-template #text_input let-form_control="form_control">
+  <input class="form-control" type="text" [formControl]="form_control" (blur)="onTextInputBlur(form_control)" />
 </ng-template>
+<!-- <input class="XXXXXXXXX" type="text" [formControl]="markerIdCtrl" (blur)="onMarkerIdChange()" /> -->
 
 <!-- THIS TEMPLATE RENDERS A SMALL FONT LABEL  -->
 <ng-template #label let-text="text">
