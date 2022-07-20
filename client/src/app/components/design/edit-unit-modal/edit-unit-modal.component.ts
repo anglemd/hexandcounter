@@ -29,6 +29,7 @@ export class EditUnitModalComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public unitJson: IUnitJson) {
     this.unitEditor = new UnitEditor(unitJson);
     this.cloneJson = this.unitEditor.json;
+    this.unitJson = JSON.parse(JSON.stringify(this.cloneJson)); // SAVE THE ORIGINAL (AFTER TWEAKING FOR EDITOR)...
 
     //SET CONTROL VALUES TO MATCH JSON...
     this.nameCtrl.setValue(this.unitEditor.name);
@@ -40,6 +41,10 @@ export class EditUnitModalComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  public isDirty() {
+    return JSON.stringify(this.unitJson) !== JSON.stringify(this.cloneJson);
+  }
 
   public onTextInputBlur = (formControl: FormControl) => {
     if (formControl == this.nameCtrl) {

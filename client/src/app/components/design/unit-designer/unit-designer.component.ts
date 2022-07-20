@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, map, Observable, take, share } from 'rxjs';
 import { UnitDesignerService } from 'src/app/services/design/unit-designer.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUnitModalComponent } from '../edit-unit-modal/edit-unit-modal.component';
@@ -30,6 +30,7 @@ export class UnitDesignerComponent implements OnInit {
   search() {
     const term = this.searchInputCtrl.value || '';
     this.foundUnits$ = this.unitService.findAllMatchingUnits$(term).pipe(
+      take(1),
       catchError((err) => {
         return [];
       }),
@@ -39,7 +40,8 @@ export class UnitDesignerComponent implements OnInit {
       }),
       map((res) => {
         return res.map((u) => new UnitEditor(u));
-      })
+      }),
+      share() // PLACE THIS LAST SO MULTIPLE THINGS ON TEMPLATE ALL GET SAME OBSERVABLE...
     );
   }
 
@@ -48,8 +50,8 @@ export class UnitDesignerComponent implements OnInit {
     this.editUnitJson(unit);
   }
 
-  editUnitJson(unitJson: IUnitJson, evt?: MouseEvent) {
-    if (evt && evt.shiftKey) {
+  editUnitJson(unitJson: IUnitJson, clone?: boolean) {
+    if (clone) {
       unitJson = JSON.parse(JSON.stringify(unitJson));
       delete unitJson._id;
       console.log(unitJson);

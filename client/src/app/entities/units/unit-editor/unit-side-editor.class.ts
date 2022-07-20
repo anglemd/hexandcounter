@@ -65,8 +65,8 @@ export class UnitSideEditor {
     this._json.barrageStrength = newVal;
     if (this._sideIndex == 0 && this._parent.sideCount == 2 && this._parent.sideEditors[1]) {
       let flipSide = this._parent.sideEditors[1];
-      if (flipSide.barrageStrength == 0) {
-        flipSide.barrageStrength = newVal; // AUTOMATICALLY MAKE SIDE 2 SAME AS SIDE ONE...
+      if (flipSide.barrageStrength) {
+        flipSide.barrageStrength = Math.round(newVal / 2); // AUTOMATICALLY MAKE SIDE 2 HALF OF SIDE ONE...
       }
     }
   }
@@ -138,8 +138,16 @@ export class UnitSideEditor {
     );
   }
 
+  public get showBarageRating(): boolean {
+    return this._parent.unitType == UnitTypeEnum.ARTILLARY_UNIT;
+  }
+
   public toString(): string {
     let valueArr: string[] = [];
+    if (this.showBarageRating) {
+      valueArr.push(this.barrageStrength.toString());
+      valueArr.push(this.range.toString());
+    }
     if (this.showCombatStrength) valueArr.push(this.combatStrength.toString());
     if (this.showActionRating) valueArr.push(this.actionRating.toString());
     if (this.showMovementRating) valueArr.push(this.movementPoints.toString());

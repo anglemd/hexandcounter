@@ -34,7 +34,7 @@
     *ngFor="let unitEditor of foundUnits$ | async; let odd = odd"
     class="clickableHover py-1 px-3"
     [class.bgDarker]="!odd"
-    (click)="editUnitJson(unitEditor.json)"
+    (click)="editUnitJson(unitEditor.json, $event.shiftKey)"
   >
     <div class="row">
       <div class="col-1">{{ unitEditor.markerId }}</div>
@@ -47,12 +47,26 @@
         {{ unitEditor.sideEditors[0]?.toString() }}
         <span *ngIf="unitEditor.sideCount == 2"> [{{ unitEditor.sideEditors[1]?.toString() }}]</span>
       </div>
-      <div class="col-2" (click)="$event.stopPropagation(); $event.preventDefault()">
-        <button mat-button class="btn p-0 px-1 mx-1 lightBorder" (click)="editUnitJson(unitEditor.json, $event)">
-          <mat-icon class="fgGray">edit</mat-icon>
+      <div class="col-2 py-0" (click)="$event.stopPropagation(); $event.preventDefault()">
+        <button
+          mat-button
+          matTooltip="Edit unit"
+          class="btn py-0 px-1 mx-1 my-0 lightBorder bgDarker"
+          (click)="editUnitJson(unitEditor.json, $event.shiftKey)"
+        >
+          <mat-icon class="fgGray pt-1" style="font-size: 12pt">edit</mat-icon>
         </button>
-        <!-- <button mat-button class="btn p-0 px-1 mx-1 lightBorder"><mat-icon class="fgGray">redo</mat-icon></button> -->
-        <button mat-button class="btn p-0 px-1 mx-1 lightBorder"><mat-icon class="fgGray">delete</mat-icon></button>
+        <button
+          mat-button
+          matTooltip="Clone unit"
+          class="btn p-0 px-1 mx-1 my-0 lightBorder bgDarker"
+          (click)="editUnitJson(unitEditor.json, true)"
+        >
+          <mat-icon class="fgGray pt-1" style="font-size: 12pt">group_add</mat-icon>
+        </button>
+        <button mat-button class="btn p-0 px-1 mx-1 my-0 lightBorder bgDarker" matTooltip="Delete unit">
+          <mat-icon class="fgGray pt-1" style="font-size: 12pt">delete</mat-icon>
+        </button>
       </div>
     </div>
   </div>
