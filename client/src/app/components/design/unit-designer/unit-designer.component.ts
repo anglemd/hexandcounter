@@ -5,6 +5,7 @@ import { UnitDesignerService } from 'src/app/services/design/unit-designer.servi
 import { MatDialog } from '@angular/material/dialog';
 import { EditUnitModalComponent } from '../edit-unit-modal/edit-unit-modal.component';
 import { IUnitJson } from 'src/app/entities/units/unit.interface';
+import { UnitEditor } from 'src/app/entities/units/unit-editor/unit-editor.class';
 
 @Component({
   selector: 'app-unit-designer',
@@ -18,7 +19,7 @@ export class UnitDesignerComponent implements OnInit {
     validators: [],
   });
 
-  public foundUnits$: Observable<IUnitJson[]> | undefined;
+  public foundUnits$: Observable<UnitEditor[]> | undefined;
   constructor(private unitService: UnitDesignerService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -35,6 +36,9 @@ export class UnitDesignerComponent implements OnInit {
       map((res) => {
         console.log(res);
         return res as Array<IUnitJson>;
+      }),
+      map((res) => {
+        return res.map((u) => new UnitEditor(u));
       })
     );
   }
@@ -44,7 +48,12 @@ export class UnitDesignerComponent implements OnInit {
     this.editUnitJson(unit);
   }
 
-  editUnitJson(unitJson: IUnitJson) {
+  editUnitJson(unitJson: IUnitJson, evt?: MouseEvent) {
+    if (evt && evt.shiftKey) {
+      unitJson = JSON.parse(JSON.stringify(unitJson));
+      delete unitJson._id;
+      console.log(unitJson);
+    }
     let dialog = this.dialog.open(EditUnitModalComponent, {
       data: unitJson,
       width: '900px',

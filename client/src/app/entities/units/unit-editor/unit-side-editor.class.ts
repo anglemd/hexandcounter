@@ -137,6 +137,16 @@ export class UnitSideEditor {
       uType == UnitTypeEnum.HQ
     );
   }
+
+  public toString(): string {
+    let valueArr: string[] = [];
+    if (this.showCombatStrength) valueArr.push(this.combatStrength.toString());
+    if (this.showActionRating) valueArr.push(this.actionRating.toString());
+    if (this.showMovementRating) valueArr.push(this.movementPoints.toString());
+    if (this.showMovementRating) valueArr.push(this.movementType.toString());
+
+    return valueArr.join('-');
+  }
 }
 
 /*

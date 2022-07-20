@@ -15,35 +15,50 @@
       </div>
     </div>
   </div>
-  <div class="row fgLightGray">
-    <div class="col-1"><ng-container *ngTemplateOutlet="label; context: { text: 'Faction:' }"></ng-container></div>
-    <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: 'Marker ID:' }"></ng-container></div>
-    <div class="col-1"><ng-container *ngTemplateOutlet="label; context: { text: 'Division:' }"></ng-container></div>
+  <div class="row fgLightGray px-3 mb-1">
+    <div class="col-1"><ng-container *ngTemplateOutlet="label; context: { text: 'Marker ID:' }"></ng-container></div>
+    <div class="col-1"><ng-container *ngTemplateOutlet="label; context: { text: 'Fac/Div:' }"></ng-container></div>
+    <!-- <div class="col-1"><ng-container *ngTemplateOutlet="label; context: { text: 'Division:' }"></ng-container></div> -->
     <div class="col-1"><ng-container *ngTemplateOutlet="label; context: { text: 'Name:' }"></ng-container></div>
     <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: 'Unit Type:' }"></ng-container></div>
     <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: 'Unit Symbol:' }"></ng-container></div>
+    <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: 'Sides:' }"></ng-container></div>
+    <div class="col-2">
+      <ng-container *ngTemplateOutlet="label; context: { text: 'Actions:' }"></ng-container>
+    </div>
   </div>
   <!-- DISPLAY MESSAGE IF NO UNITS FOUND.... -->
   <div *ngIf="!foundUnits$ || (foundUnits$ | async)?.length == 0">No units</div>
   <!-- DISPLAY LIST OF FOUND UNITS -->
   <div
-    *ngFor="let unit of foundUnits$ | async; let odd = odd"
+    *ngFor="let unitEditor of foundUnits$ | async; let odd = odd"
     class="clickableHover py-1 px-3"
     [class.bgDarker]="!odd"
-    (click)="editUnitJson(unit)"
+    (click)="editUnitJson(unitEditor.json)"
   >
     <div class="row">
-      <div class="col-1">{{ unit.faction }}</div>
-      <div class="col-2">{{ unit.markerId }}</div>
-      <div class="col-1">{{ unit.division }}</div>
-      <div class="col-1">{{ unit.name }}</div>
-      <div class="col-2">{{ unit.unitType }}</div>
-      <div class="col-2">{{ unit.unitAppearance?.unitSymbol }}</div>
+      <div class="col-1">{{ unitEditor.markerId }}</div>
+      <div class="col-1">{{ unitEditor.faction }} / {{ unitEditor.division }}</div>
+      <!-- <div class="col-1">{{ unitEditor.division }}</div> -->
+      <div class="col-1">{{ unitEditor.name }}</div>
+      <div class="col-2">{{ unitEditor.unitType }}</div>
+      <div class="col-2">{{ unitEditor.unitAppearanceEditor.unitSymbol }}</div>
+      <div class="col-3">
+        {{ unitEditor.sideEditors[0]?.toString() }}
+        <span *ngIf="unitEditor.sideCount == 2"> [{{ unitEditor.sideEditors[1]?.toString() }}]</span>
+      </div>
+      <div class="col-2" (click)="$event.stopPropagation(); $event.preventDefault()">
+        <button mat-button class="btn p-0 px-1 mx-1 lightBorder" (click)="editUnitJson(unitEditor.json, $event)">
+          <mat-icon class="fgGray">edit</mat-icon>
+        </button>
+        <!-- <button mat-button class="btn p-0 px-1 mx-1 lightBorder"><mat-icon class="fgGray">redo</mat-icon></button> -->
+        <button mat-button class="btn p-0 px-1 mx-1 lightBorder"><mat-icon class="fgGray">delete</mat-icon></button>
+      </div>
     </div>
   </div>
 </mat-card>
 
 <!-- THIS TEMPLATE RENDERS A SMALL FONT LABEL  -->
 <ng-template #label let-text="text">
-  <div class="fgLightGray px-3 labelText">{{ text }}</div>
+  <div class="fgLightGray px-1 labelText">{{ text }}</div>
 </ng-template>
