@@ -1,11 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { catchError, map, Observable, take, share } from 'rxjs';
+import { catchError, map, Observable, take, share, Subscription } from 'rxjs';
 import { UnitDesignerService } from 'src/app/services/design/unit-designer.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUnitModalComponent } from '../edit-unit-modal/edit-unit-modal.component';
 import { IUnitJson } from 'src/app/entities/units/unit.interface';
 import { UnitEditor } from 'src/app/entities/units/unit-editor/unit-editor.class';
+import { LayoutService } from 'src/app/services/layout.service';
+import { Size } from 'src/app/entities/geometry/core/size.class';
 
 @Component({
   selector: 'app-unit-designer',
@@ -20,15 +22,37 @@ export class UnitDesignerComponent implements OnInit {
   });
 
   public foundUnits$: Observable<UnitEditor[]> | undefined;
-  constructor(private unitService: UnitDesignerService, private dialog: MatDialog) {}
+
+  public winHeight$: Observable<string>;
+
+  constructor(
+    private unitService: UnitDesignerService,
+    private dialog: MatDialog,
+    private layoutService: LayoutService
+  ) {
+    this.winHeight$ = layoutService.mainAreaSize$.pipe(
+      map((size: Size) => {
+        let ht = size.height;
+        console.log(size);
+        ht = ht - 180;
+        return ht.toString() + 'px';
+      })
+    );
+  }
 
   ngOnInit(): void {
-    this.searchInputCtrl.setValue('SM.');
+    let term = window.localStorage.getItem('search') || 'SM.00.00.00';
+    this.searchInputCtrl.setValue(term);
     this.search();
+  }
+
+  onKeyDown(evt: KeyboardEvent) {
+    if (evt.key == 'Enter') this.search();
   }
 
   search() {
     const term = this.searchInputCtrl.value || '';
+    window.localStorage.setItem('search', term);
     this.foundUnits$ = this.unitService.findAllMatchingUnits$(term).pipe(
       take(1),
       catchError((err) => {

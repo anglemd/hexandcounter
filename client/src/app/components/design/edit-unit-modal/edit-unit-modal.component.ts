@@ -10,16 +10,15 @@ import { IUnitJson } from 'src/app/entities/units/unit.interface';
 })
 export class EditUnitModalComponent implements OnInit {
   // TEXT INPUT BASED CONTROLS
-  public nameCtrl = new FormControl('', { updateOn: 'blur' }); // Unit name...
-  public markerIdCtrl = new FormControl('', { updateOn: 'blur' }); // Marker ID
+  public nameCtrl = new FormControl(''); // Unit name...
+  public markerIdCtrl = new FormControl(''); // Marker ID
   // ENUM BASED CONTROLS
   public factionCtrl = new FormControl(''); // Unit faction...
   public typeCtrl = new FormControl(''); // Unit type...
   public divisionCtrl = new FormControl(''); // Division name
   public symbolCtrl = new FormControl('');
-
-  // CONTROLS FOR UNIT SIDES...
-  public sideFormControls: Array<FormControl[]> = [[new FormControl('')], [new FormControl('')]];
+  public armorTypeCtrl = new FormControl('');
+  public unitSizeCtrl = new FormControl('');
 
   ////
   public cloneJson: IUnitJson; // THIS IS THE EDITABLE COPY...
@@ -30,6 +29,9 @@ export class EditUnitModalComponent implements OnInit {
     this.unitEditor = new UnitEditor(unitJson);
     this.cloneJson = this.unitEditor.json;
     this.unitJson = JSON.parse(JSON.stringify(this.cloneJson)); // SAVE THE ORIGINAL (AFTER TWEAKING FOR EDITOR)...
+    // console.log(this.cloneJson);
+    // console.log(this.unitJson);
+    // console.log(this.isDirty());
 
     //SET CONTROL VALUES TO MATCH JSON...
     this.nameCtrl.setValue(this.unitEditor.name);
@@ -38,6 +40,8 @@ export class EditUnitModalComponent implements OnInit {
     this.divisionCtrl.setValue(this.unitEditor.division);
     this.typeCtrl.setValue(this.unitEditor.unitType);
     this.symbolCtrl.setValue(this.unitEditor.unitAppearanceEditor.unitSymbol);
+    this.armorTypeCtrl.setValue(this.unitEditor.armorType);
+    this.unitSizeCtrl.setValue(this.unitEditor.unitSize);
   }
 
   ngOnInit(): void {}
@@ -47,6 +51,7 @@ export class EditUnitModalComponent implements OnInit {
   }
 
   public onTextInputBlur = (formControl: FormControl) => {
+    console.log('here');
     if (formControl == this.nameCtrl) {
       this.unitEditor.name = formControl.value || '';
     } else if (formControl == this.markerIdCtrl) {
@@ -65,6 +70,10 @@ export class EditUnitModalComponent implements OnInit {
       this.unitEditor.unitType = newValue;
     } else if (formControl == this.symbolCtrl) {
       this.unitEditor.unitAppearanceEditor.unitSymbol = newValue;
+    } else if (formControl == this.armorTypeCtrl) {
+      this.unitEditor.armorType = newValue;
+    } else if (formControl == this.unitSizeCtrl) {
+      this.unitEditor.unitSize = newValue;
     }
   };
 }

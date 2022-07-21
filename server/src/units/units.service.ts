@@ -46,7 +46,7 @@ export class UnitsService {
         { division: regex },
       ],
     };
-    return this.unitModel.find(query);
+    return this.unitModel.find(query).sort({ markerId: 1 });
   }
 
   update(id: string, updateUnitDto: IUnitJson) {

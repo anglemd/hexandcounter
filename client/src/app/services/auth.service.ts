@@ -25,12 +25,12 @@ export class AuthService {
   }
 
   public login(user: string, pass: string): Observable<string | null> {
-    localStorage.clear();
+    // localStorage.clear();
     return this.getSessionToken$(user, pass);
   }
 
   public logout() {
-    localStorage.clear();
+    localStorage.removeItem('id_token');
     this.userNameSubject$.next(this._notLoggedIn);
     this.router.navigateToLogin();
     this.getUser$().subscribe();

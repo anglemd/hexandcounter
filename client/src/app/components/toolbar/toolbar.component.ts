@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatToolbar } from '@angular/material/toolbar';
 import { delay } from 'rxjs';
 import { Size } from 'src/app/entities/geometry/core/size.class';
@@ -11,21 +11,24 @@ import { WindowService } from 'src/app/services/window.service';
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
 })
-export class ToolbarComponent {
+export class ToolbarComponent implements OnInit {
   @ViewChild('oToolbar', { static: true }) matToolbarRef: MatToolbar | undefined;
 
   constructor(
     private layoutService: LayoutService,
     private windowService: WindowService,
-    private routerService: RouterService,
     private websocketService: WebsocketService
   ) {
-    this.windowService.resize$.pipe(delay(50)).subscribe(() => {
-      // LISTEN TO WINDOW RESIZE EVENTS SO WE CAN CHECK OUR SIZE AND NOTIFY THE LAYOUT SERVICE...
-      if (this.matToolbarRef) {
-        // console.log(this.matToolbarRef._elementRef.nativeElement.clientHeight);
-        this.layoutService.navBarHeight = this.matToolbarRef._elementRef.nativeElement.clientHeight;
-      }
-    });
+    this.windowService.resize$.pipe(delay(50)).subscribe(this.initSize);
+  }
+
+  private initSize = () => {
+    if (this.matToolbarRef) {
+      this.layoutService.navBarHeight = this.matToolbarRef._elementRef.nativeElement.clientHeight;
+    }
+  };
+
+  ngOnInit() {
+    this.initSize();
   }
 }

@@ -58,7 +58,7 @@
   <!-- LABELS - SECOND ROW -->
   <div class="row pb-2 mt-3">
     <div class="col-4"><ng-container *ngTemplateOutlet="label; context: { text: 'Unit Symbol:' }"></ng-container></div>
-    <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
+    <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: 'Armor Type' }"></ng-container></div>
     <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
     <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
   </div>
@@ -71,7 +71,14 @@
         "
       ></ng-container>
     </div>
-    <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
+    <div class="col-3">
+      <ng-container
+        *ngTemplateOutlet="
+          enum_select;
+          context: { form_control: armorTypeCtrl, enum_list: UnitEditor.unitArmorTypeEnumStrings }
+        "
+      ></ng-container>
+    </div>
     <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
     <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
   </div>
@@ -82,7 +89,7 @@
     <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showBarageRating">
       <ng-container *ngTemplateOutlet="label; context: { text: 'Barage:' }"></ng-container>
     </div>
-    <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showBarageRating">
+    <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showRange">
       <ng-container *ngTemplateOutlet="label; context: { text: 'Range:' }"></ng-container>
     </div>
     <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showCombatStrength">
@@ -90,6 +97,9 @@
     </div>
     <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showActionRating">
       <ng-container *ngTemplateOutlet="label; context: { text: 'Action Rating:' }"></ng-container>
+    </div>
+    <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showSupplyCapacity">
+      <ng-container *ngTemplateOutlet="label; context: { text: 'Supply cap:' }"></ng-container>
     </div>
     <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showMovementRating">
       <ng-container *ngTemplateOutlet="label; context: { text: 'Movet Points:' }"></ng-container>
@@ -104,14 +114,32 @@
       <div class="col-2" *ngIf="sideEditor.showBarageRating">
         <input type="number" class="form-control" [(ngModel)]="sideEditor.barrageStrength" />
       </div>
-      <div class="col-2" *ngIf="sideEditor.showBarageRating">
+      <div class="col-2" *ngIf="sideEditor.showRange">
         <input type="number" class="form-control" [(ngModel)]="sideEditor.range" />
       </div>
+      <!-- COMBAT STRENGTH (AND CHECKBOX) -->
       <div class="col-2" *ngIf="sideEditor.showCombatStrength">
-        <input type="number" class="form-control" [(ngModel)]="sideEditor.combatStrength" />
+        <div class="input-group">
+          <input type="number" class="form-control" [(ngModel)]="sideEditor.combatStrength" />
+          <div class="input-group-append" matTooltip="Defend only?">
+            <div class="input-group-text">
+              <mat-checkbox [(ngModel)]="sideEditor.defendOnly" color="primary"></mat-checkbox>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col-2" *ngIf="sideEditor.showActionRating">
-        <input type="number" class="form-control" [(ngModel)]="sideEditor.actionRating" />
+        <div class="input-group">
+          <input type="number" class="form-control" [(ngModel)]="sideEditor.actionRating" />
+          <div class="input-group-append" matTooltip="No rebuild?">
+            <div class="input-group-text">
+              <mat-checkbox [(ngModel)]="sideEditor.noRebuild" color="primary"></mat-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2" *ngIf="sideEditor.showSupplyCapacity">
+        <input type="number" class="form-control" [(ngModel)]="sideEditor.supplyCapacity" />
       </div>
       <div class="col-2" *ngIf="sideEditor.showMovementRating">
         <input type="number" class="form-control" [(ngModel)]="sideEditor.movementPoints" />
@@ -138,7 +166,9 @@
 <div class="row mb-2 px-3">
   <div class="col-6"></div>
   <div class="col-6 text-end">
-    <button mat-raised-button class="px-4 py-2 mx-2" [mat-dialog-close]="cloneJson" [disabled]="isDirty()">Save</button>
+    <button mat-raised-button class="px-4 py-2 mx-2" [mat-dialog-close]="cloneJson" [disabled]="!isDirty()">
+      Save
+    </button>
     <button mat-raised-button class="px-3 py-2 mx-2" mat-dialog-close="">Cancel</button>
   </div>
 </div>
@@ -160,7 +190,7 @@
 
 <!-- THIS TEMPLATE RENDERS A TEXT INPUT TO STORE TEXT IN UNIT.[unit_property] -->
 <ng-template #text_input let-form_control="form_control">
-  <input class="form-control" type="text" [formControl]="form_control" (blur)="onTextInputBlur(form_control)" />
+  <input class="form-control" type="text" [formControl]="form_control" (keyup)="onTextInputBlur(form_control)" />
 </ng-template>
 <!-- <input class="XXXXXXXXX" type="text" [formControl]="markerIdCtrl" (blur)="onMarkerIdChange()" /> -->
 

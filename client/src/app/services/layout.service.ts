@@ -38,7 +38,7 @@ export class LayoutService {
   private calculateMainPanelSize() {
     let winSize = this.windowService.windowSize;
     let mainPanelSize = new Size(winSize.width, winSize.height - this.navBarHeight);
-    // console.log('Main panel size: ', mainPanelSize);
+    console.log('Main panel size: ', mainPanelSize);
     this.mainAreaSizeBehSubj$.next(mainPanelSize);
   }
 }

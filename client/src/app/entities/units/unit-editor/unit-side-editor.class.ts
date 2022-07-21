@@ -20,9 +20,36 @@ export class UnitSideEditor {
     this._json.combatStrength = newVal;
     if (this._sideIndex == 0 && this._parent.sideCount == 2 && this._parent.sideEditors[1]) {
       let flipSide = this._parent.sideEditors[1];
-      if (flipSide.combatStrength == 0) {
-        flipSide.combatStrength = Math.round(newVal / 2); // AUTOMATICALLY MAKE SIDE 2 COMBAT STR HALF OF SIDE ONE...
-      }
+      // if (flipSide.combatStrength == 0) {
+      flipSide.combatStrength = Math.round(newVal / 2); // AUTOMATICALLY MAKE SIDE 2 COMBAT STR HALF OF SIDE ONE...
+      // }
+    }
+  }
+
+  public get supplyCapacity(): number {
+    if (!this._json.supplyCapacity) return 0;
+    return this._json.supplyCapacity;
+  }
+
+  public set supplyCapacity(newVal: number) {
+    this._json.supplyCapacity = newVal;
+    if (this._sideIndex == 0 && this._parent.sideCount == 2 && this._parent.sideEditors[1]) {
+      let flipSide = this._parent.sideEditors[1];
+      flipSide.supplyCapacity = newVal; // AUTOMATICALLY MAKE SIDE 2 THE SAME...
+    }
+  }
+
+  public get defendOnly(): boolean {
+    if (!this._json.defendOnly) return false;
+    return this._json.defendOnly;
+  }
+
+  public set defendOnly(newVal: boolean) {
+    this._json.defendOnly = newVal;
+    if (this._sideIndex == 0 && this._parent.sideCount == 2 && this._parent.sideEditors[1]) {
+      let flipSide = this._parent.sideEditors[1];
+
+      flipSide.defendOnly = newVal; // AUTOMATICALLY MAKE SIDE 2 THE SAME...
     }
   }
 
@@ -86,6 +113,15 @@ export class UnitSideEditor {
     }
   }
 
+  public get noRebuild(): boolean {
+    return this._parent.noRebuild;
+  }
+
+  public set noRebuild(newVal: boolean) {
+    this._parent.noRebuild = newVal;
+    console.log(this._parent.json);
+  }
+
   public get transportPoints(): number {
     if (!this._json.transportPoints) this._json.transportPoints = 0;
     return this._json.transportPoints;
@@ -138,18 +174,29 @@ export class UnitSideEditor {
     );
   }
 
+  public get showRange(): boolean {
+    return this._parent.unitType == UnitTypeEnum.HQ || this._parent.unitType == UnitTypeEnum.ARTILLARY_UNIT;
+  }
+
   public get showBarageRating(): boolean {
     return this._parent.unitType == UnitTypeEnum.ARTILLARY_UNIT;
   }
 
+  public get showSupplyCapacity(): boolean {
+    return this._parent.unitType == UnitTypeEnum.GROUND_TRANSPORT;
+  }
+
   public toString(): string {
     let valueArr: string[] = [];
-    if (this.showBarageRating) {
-      valueArr.push(this.barrageStrength.toString());
-      valueArr.push(this.range.toString());
+    if (this.showBarageRating) valueArr.push(this.barrageStrength.toString());
+    if (this.showRange) valueArr.push(this.range.toString());
+    if (this.defendOnly) {
+      if (this.showCombatStrength) valueArr.push('(' + this.combatStrength.toString() + ')');
+    } else {
+      if (this.showCombatStrength) valueArr.push(this.combatStrength.toString());
     }
-    if (this.showCombatStrength) valueArr.push(this.combatStrength.toString());
-    if (this.showActionRating) valueArr.push(this.actionRating.toString());
+    if (this.showActionRating) valueArr.push(this.actionRating.toString() + (this.noRebuild ? '*' : ''));
+    if (this.showSupplyCapacity) valueArr.push(this.supplyCapacity.toString());
     if (this.showMovementRating) valueArr.push(this.movementPoints.toString());
     if (this.showMovementRating) valueArr.push(this.movementType.toString());
 

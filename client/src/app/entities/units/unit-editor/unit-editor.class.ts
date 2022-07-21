@@ -3,6 +3,7 @@ import { ColorEnum } from '../../rendering/color.enum';
 import { UnitMovementTypesEnum } from '../unit-movement-type.enum';
 import { IUnitSideJson } from '../unit-side.interface';
 import { UnitSizeEnum } from '../unit-size.enum';
+import { UnitArmorTypeEnum } from '../unit-symbol-type.enum';
 import { UnitSymbolEnum } from '../unit-symbol.enum';
 import { UnitTypeEnum } from '../unit-type.enum';
 import { IUnitJson } from '../unit.interface';
@@ -14,15 +15,18 @@ export class UnitEditor {
   public static unitSizeEnumStrings = Object.values(UnitSizeEnum);
   public static unitTypeEnumStrings = Object.values(UnitTypeEnum);
   public static unitMovementTypesEnumStrings = Object.values(UnitMovementTypesEnum);
-
+  public static unitArmorTypeEnumStrings = Object.values(UnitArmorTypeEnum);
   public static unitSymbolEnumStrings = Object.values(UnitSymbolEnum);
   public static colorEnumStrings = Object.values(ColorEnum);
   public static divisionNames: Array<string> = ['', '3.Pz', '4.Pz', '7.Pz', '10.Pz'];
+
   public json: IUnitJson;
   public sideEditors: UnitSideEditor[] = [];
   public unitAppearanceEditor: UnitAppearanceEditor;
 
   constructor(private _json: IUnitJson) {
+    if (!_json) _json = { markerId: '' };
+    if (!_json.markerId) _json.markerId = '';
     this.json = JSON.parse(JSON.stringify(_json));
     // if (!this.json.unitAppearance) this.json.unitAppearance = {};
     this.unitAppearanceEditor = new UnitAppearanceEditor(this);
@@ -34,7 +38,39 @@ export class UnitEditor {
     return UnitTypeEnum;
   }
 
+  private incrementMarkerId() {
+    let vals = this._json.markerId.split('.');
+    let wasIncremented = false;
+    vals.reverse();
+    vals.forEach((val: string, i: number) => {
+      if (!wasIncremented) {
+        let num = parseInt(val);
+        if (num == undefined) {
+          wasIncremented = true;
+          return;
+        }
+        if (num >= 20) {
+          vals[i] = '01';
+          return;
+        }
+        wasIncremented = true;
+        num += 1;
+        vals[i] = num.toString();
+        if (vals[i].length == 1) vals[i] = '0' + vals[i];
+
+        console.log(vals);
+      }
+    });
+    vals.reverse();
+    this.markerId = vals.join('.');
+    console.log(this._json.markerId);
+  }
+
   private syncSideEditors() {
+    if (!this._json._id && this._json.markerId) {
+      this.incrementMarkerId();
+    }
+
     if (this.json.unitType == UnitTypeEnum.HQ) this.sideCount = 2;
     if (this.json.unitType == UnitTypeEnum.COMBAT_UNIT) this.sideCount = 2;
     if (this.json.unitType == UnitTypeEnum.ARTILLARY_UNIT) this.sideCount = 2;
@@ -49,6 +85,14 @@ export class UnitEditor {
 
   public set markerId(newVal: string) {
     this.json.markerId = newVal;
+  }
+
+  public get armorType(): UnitArmorTypeEnum {
+    return this._json.armorType || UnitArmorTypeEnum.OTHER;
+  }
+
+  public set armorType(newVal: string) {
+    this.json.armorType = UnitEditor.unitArmorTypeEnumStrings.find((item) => item == newVal);
   }
 
   public get maxSteps(): number {
@@ -85,6 +129,8 @@ export class UnitEditor {
 
   public set unitType(newVal: string) {
     this.json.unitType = UnitEditor.unitTypeEnumStrings.find((item) => item == newVal);
+    if (this.unitType == UnitTypeEnum.HQ) this.unitAppearanceEditor.unitSymbol = UnitSymbolEnum.HQ;
+    if (this.unitType == UnitTypeEnum.ARTILLARY_UNIT) this.unitAppearanceEditor.unitSymbol = UnitSymbolEnum.ARTILLARY;
     this.syncSideEditors();
   }
 
@@ -135,6 +181,16 @@ export class UnitEditor {
       this.json.unitSides = [origSide, origSide2];
       this.sideEditors = [new UnitSideEditor(0, this), new UnitSideEditor(1, this)];
     }
+  }
+
+  public get noRebuild(): boolean {
+    return this.json.noRebuild == true;
+  }
+
+  public set noRebuild(newVal: boolean) {
+    console.log(newVal);
+    this.json.noRebuild = newVal;
+    console.log(this.json.noRebuild);
   }
 
   // HAS THE RESULTING JSON BEEN EDITED COMPAIRED TO THE ORIGINAL JSON?

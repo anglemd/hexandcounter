@@ -15,7 +15,7 @@ export class UnitDesignerService {
   }
 
   findAllMatchingUnits$(term: string) {
-    return this.http.get('api/units/match/' + term);
+    return this.http.get('api/units/match/' + encodeURIComponent(term));
   }
 
   saveUnitEdits$(id: string, unitJson: IUnitJson) {

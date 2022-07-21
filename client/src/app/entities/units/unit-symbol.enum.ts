@@ -18,6 +18,7 @@ export enum UnitSymbolEnum {
   MG = 'MG',
   MG_MOTORIZED = 'MG_MOTORIZED',
   BICYCLE = 'BICYCLE',
+  FLAMETHROWER = 'FLAMETHROWER',
 
   ANTI_AIRCRAFT = 'ANTI_AIRCRAFT', // HVY_AT
   ARTILLARY = 'ARTILLARY',
@@ -31,4 +32,5 @@ export enum UnitSymbolEnum {
   // HQ UNIT TYPES:
   HQ = 'HQ',
   DIVISION_MARKER = 'DIVISION_MARKER',
+  SUPPLY_DUMP = 'SUPPLY_DUMP',
 }

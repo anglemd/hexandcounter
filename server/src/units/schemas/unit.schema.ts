@@ -3,6 +3,7 @@ import { Document, SchemaTypes, Types } from 'mongoose';
 import { FactionEnum } from '../enums/faction.enum';
 import { UnitSizeEnum } from '../enums/unit-size.enum';
 import { UnitTypeEnum } from '../enums/unit-type.enum';
+import { UnitArmorTypeEnum } from '../interfaces/unit-armor-type.interface';
 import { IUnitSideJson } from '../interfaces/unit-side.interface';
 import { IUnitAppearanceJson } from '../interfaces/unit.appearance';
 import { IUnitJson } from '../interfaces/unit.interface';
@@ -35,11 +36,17 @@ export class UnitRecord implements IUnitJson {
   @Prop()
   name?: string;
 
+  @Prop()
+  armorType?: UnitArmorTypeEnum;
+
   @Prop({ type: Array<IUnitSideJson> })
   unitSides?: IUnitSideJson[];
 
   @Prop({ type: Object })
   unitAppearance?: IUnitAppearanceJson;
+
+  @Prop()
+  noRebuild?: boolean;
 }
 
 export const UnitSchema = SchemaFactory.createForClass(UnitRecord);

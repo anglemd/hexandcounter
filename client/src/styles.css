@@ -118,6 +118,9 @@ body {
 .fgGray {
   color: #666666 !important;
 }
+.fgMedGray {
+  color: #888888 !important;
+}
 .fgLightGray {
   color: #999999 !important;
 }
