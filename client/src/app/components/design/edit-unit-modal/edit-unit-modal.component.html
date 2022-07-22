@@ -13,9 +13,11 @@
   <!-- LABELS - FIRST ROW -->
   <div class="row pb-2">
     <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: 'Faction:' }"></ng-container></div>
-    <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: 'Marker Id:' }"></ng-container></div>
-    <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: 'Division:' }"></ng-container></div>
+    <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: 'Marker Id:' }"></ng-container></div>
     <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: 'Name:' }"></ng-container></div>
+    <div class="col-3">
+      <ng-container *ngTemplateOutlet="label; context: { text: 'Division / Steps:' }"></ng-container>
+    </div>
     <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: 'Unit Type:' }"></ng-container></div>
   </div>
   <!-- EDIT CONTROLS - FIRST ROW -->
@@ -30,19 +32,30 @@
       ></ng-container>
     </div>
     <!-- MARKER ID -->
-    <div class="col-3">
-      <ng-container *ngTemplateOutlet="text_input; context: { form_control: markerIdCtrl }"></ng-container>
-    </div>
-    <!-- UNIT DIVISION CONTROL -->
     <div class="col-2">
-      <ng-container
-        *ngTemplateOutlet="enum_select; context: { form_control: divisionCtrl, enum_list: UnitEditor.divisionNames }"
-      ></ng-container>
+      <ng-container *ngTemplateOutlet="text_input; context: { form_control: markerIdCtrl }"></ng-container>
     </div>
 
     <!-- UNIT NAME CONTROL -->
     <div class="col-2">
       <ng-container *ngTemplateOutlet="text_input; context: { form_control: nameCtrl }"></ng-container>
+    </div>
+
+    <!-- UNIT DIVISION CONTROL -->
+    <div class="col-3">
+      <div class="row">
+        <div class="col-6 p-0">
+          <ng-container
+            *ngTemplateOutlet="
+              enum_select;
+              context: { form_control: divisionCtrl, enum_list: UnitEditor.divisionNames }
+            "
+          ></ng-container>
+        </div>
+        <div class="col-6 p-0">
+          <input class="form-control" type="number" [(ngModel)]="unitEditor.maxSteps" (change)="onChangeSteps()" />
+        </div>
+      </div>
     </div>
 
     <!-- UNIT TYPE CONTROL -->
@@ -58,9 +71,9 @@
   <!-- LABELS - SECOND ROW -->
   <div class="row pb-2 mt-3">
     <div class="col-4"><ng-container *ngTemplateOutlet="label; context: { text: 'Unit Symbol:' }"></ng-container></div>
-    <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: 'Armor Type' }"></ng-container></div>
+    <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: 'Armor Type:' }"></ng-container></div>
+    <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: 'Unit Size:' }"></ng-container></div>
     <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
-    <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
   </div>
   <div class="row">
     <div class="col-4">
@@ -79,8 +92,15 @@
         "
       ></ng-container>
     </div>
+    <div class="col-3">
+      <ng-container
+        *ngTemplateOutlet="
+          enum_select;
+          context: { form_control: unitSizeCtrl, enum_list: UnitEditor.unitSizeEnumStrings }
+        "
+      ></ng-container>
+    </div>
     <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
-    <div class="col-3"><ng-container *ngTemplateOutlet="label; context: { text: '' }"></ng-container></div>
   </div>
   <!-- END CONTROLS FOR LINE TWO  -->
   <!-- START CONTROLS FOR EDITING UNIT SIDES  -->
@@ -89,14 +109,14 @@
     <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showBarageRating">
       <ng-container *ngTemplateOutlet="label; context: { text: 'Barage:' }"></ng-container>
     </div>
-    <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showRange">
-      <ng-container *ngTemplateOutlet="label; context: { text: 'Range:' }"></ng-container>
-    </div>
     <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showCombatStrength">
       <ng-container *ngTemplateOutlet="label; context: { text: 'Combat Str:' }"></ng-container>
     </div>
     <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showActionRating">
       <ng-container *ngTemplateOutlet="label; context: { text: 'Action Rating:' }"></ng-container>
+    </div>
+    <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showRange">
+      <ng-container *ngTemplateOutlet="label; context: { text: 'Range:' }"></ng-container>
     </div>
     <div class="col-2" *ngIf="unitEditor.sideEditors[0]?.showSupplyCapacity">
       <ng-container *ngTemplateOutlet="label; context: { text: 'Supply cap:' }"></ng-container>
@@ -113,9 +133,6 @@
     <div class="row pt-2">
       <div class="col-2" *ngIf="sideEditor.showBarageRating">
         <input type="number" class="form-control" [(ngModel)]="sideEditor.barrageStrength" />
-      </div>
-      <div class="col-2" *ngIf="sideEditor.showRange">
-        <input type="number" class="form-control" [(ngModel)]="sideEditor.range" />
       </div>
       <!-- COMBAT STRENGTH (AND CHECKBOX) -->
       <div class="col-2" *ngIf="sideEditor.showCombatStrength">
@@ -137,6 +154,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="col-2" *ngIf="sideEditor.showRange">
+        <input type="number" class="form-control" [(ngModel)]="sideEditor.range" />
       </div>
       <div class="col-2" *ngIf="sideEditor.showSupplyCapacity">
         <input type="number" class="form-control" [(ngModel)]="sideEditor.supplyCapacity" />

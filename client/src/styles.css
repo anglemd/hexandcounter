@@ -177,3 +177,7 @@ body {
 .labelText {
   font-size: 0.8em;
 }
+
+.fontSmaller {
+  font-size: 80%;
+}

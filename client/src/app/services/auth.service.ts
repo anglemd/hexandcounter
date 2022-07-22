@@ -42,7 +42,7 @@ export class AuthService {
   }
 
   private getSessionToken$(un: string, pw: string): Observable<string | null> {
-    if (this.sessionToken) return of(this._sessionToken); // return value if we have it.
+    if (this.sessionToken) return of(this.sessionToken); // return value if we have it.
     if (this.sessionToken$) {
       return this.sessionToken$;
     } // return observable if work in progress
@@ -56,13 +56,14 @@ export class AuthService {
         take(1),
         catchError((err) => {
           console.log(err);
-          localStorage.clear();
+          localStorage.removeItem('id_token');
           return of({ access_token: this._notLoggedIn });
         }),
         tap((res: { access_token: string }) => {
           this.sessionToken$ = null; //RESET NOW THAT THE FETCH IS DONE...
           localStorage.setItem('id_token', res.access_token);
-          this.router.navigateToList();
+          // this.router.navigateToList();
+          this.router.navigateToUnitDesigner();
         }),
         map((res: { access_token: string }) => {
           if (res.access_token) {

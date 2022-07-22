@@ -189,13 +189,13 @@ export class UnitSideEditor {
   public toString(): string {
     let valueArr: string[] = [];
     if (this.showBarageRating) valueArr.push(this.barrageStrength.toString());
-    if (this.showRange) valueArr.push(this.range.toString());
     if (this.defendOnly) {
       if (this.showCombatStrength) valueArr.push('(' + this.combatStrength.toString() + ')');
     } else {
       if (this.showCombatStrength) valueArr.push(this.combatStrength.toString());
     }
     if (this.showActionRating) valueArr.push(this.actionRating.toString() + (this.noRebuild ? '*' : ''));
+    if (this.showRange) valueArr.push(this.range.toString());
     if (this.showSupplyCapacity) valueArr.push(this.supplyCapacity.toString());
     if (this.showMovementRating) valueArr.push(this.movementPoints.toString());
     if (this.showMovementRating) valueArr.push(this.movementType.toString());

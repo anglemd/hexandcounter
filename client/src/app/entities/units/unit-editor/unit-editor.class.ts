@@ -96,11 +96,14 @@ export class UnitEditor {
   }
 
   public get maxSteps(): number {
-    if (!this.json.maxSteps) this.json.maxSteps = 1;
+    if (!this.json.maxSteps) return 1;
     return this.json.maxSteps;
   }
 
   public set maxSteps(newVal: number) {
+    if (newVal > 1) {
+      this.division = '';
+    }
     this.json.maxSteps = newVal;
   }
 

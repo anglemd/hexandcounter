@@ -24,7 +24,6 @@
   <div class="row fgLightGray px-3 mb-1">
     <div class="col-1"><ng-container *ngTemplateOutlet="label; context: { text: 'Marker ID:' }"></ng-container></div>
     <div class="col-1"><ng-container *ngTemplateOutlet="label; context: { text: 'Fac/Div:' }"></ng-container></div>
-    <!-- <div class="col-1"><ng-container *ngTemplateOutlet="label; context: { text: 'Division:' }"></ng-container></div> -->
     <div class="col-1"><ng-container *ngTemplateOutlet="label; context: { text: 'Name:' }"></ng-container></div>
     <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: 'Unit Type:' }"></ng-container></div>
     <div class="col-2"><ng-container *ngTemplateOutlet="label; context: { text: 'Unit Symbol:' }"></ng-container></div>
@@ -45,9 +44,20 @@
     >
       <div class="row">
         <div class="col-1">{{ unitEditor.markerId }}</div>
-        <div class="col-1">{{ unitEditor.faction }} / {{ unitEditor.division }}</div>
-        <!-- <div class="col-1">{{ unitEditor.division }}</div> -->
-        <div class="col-1">{{ unitEditor.name }}</div>
+        <div class="col-1">
+          <span>{{ unitEditor.faction }}</span>
+          <span *ngIf="unitEditor.division && unitEditor.division.length > 0" class="fgMedGray">
+            {{ unitEditor.division }}</span
+          >
+          <span *ngIf="!unitEditor.division || unitEditor.division.length == 0" class="fgMedGray">
+            ({{ unitEditor.maxSteps }})</span
+          >
+        </div>
+        <!-- UNIT NAME AND SIZE -->
+        <div class="col-1">
+          <span>{{ unitEditor.name }}</span>
+          <span class="fgLightGray fontSmaller"> ({{ unitEditor.unitSize.split("_")[1] }})</span>
+        </div>
         <div class="col-2">{{ unitEditor.unitType }}</div>
         <div class="col-2">
           <span

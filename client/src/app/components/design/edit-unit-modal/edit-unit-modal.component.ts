@@ -59,6 +59,10 @@ export class EditUnitModalComponent implements OnInit {
     }
   };
 
+  public onChangeSteps = () => {
+    this.divisionCtrl.setValue(this.unitEditor.division);
+  };
+
   onChangeUnitProperty = (formControl: FormControl, newValue: string) => {
     console.log(newValue);
     formControl.setValue(newValue);
@@ -66,6 +70,7 @@ export class EditUnitModalComponent implements OnInit {
       this.unitEditor.faction = newValue;
     } else if (formControl == this.divisionCtrl) {
       this.unitEditor.division = newValue;
+      this.unitEditor.maxSteps = 1;
     } else if (formControl == this.typeCtrl) {
       this.unitEditor.unitType = newValue;
     } else if (formControl == this.symbolCtrl) {
