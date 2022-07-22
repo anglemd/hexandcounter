@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UnitEditor } from 'src/app/entities/units/unit-editor/unit-editor.class';
 import { IUnitJson } from 'src/app/entities/units/unit.interface';
+import { UnitDesignerService } from 'src/app/services/design/unit-designer.service';
 
 @Component({
   selector: 'app-edit-unit-modal',
@@ -25,8 +26,8 @@ export class EditUnitModalComponent implements OnInit {
   public UnitEditor = UnitEditor; // USED BY TEMPLATE FOR STATIC PROPERTIES...
   public unitEditor: UnitEditor;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public unitJson: IUnitJson) {
-    this.unitEditor = new UnitEditor(unitJson);
+  constructor(@Inject(MAT_DIALOG_DATA) public unitJson: IUnitJson, unitDesignerService: UnitDesignerService) {
+    this.unitEditor = new UnitEditor(unitJson, unitDesignerService);
     this.cloneJson = this.unitEditor.json;
     this.unitJson = JSON.parse(JSON.stringify(this.cloneJson)); // SAVE THE ORIGINAL (AFTER TWEAKING FOR EDITOR)...
     // console.log(this.cloneJson);

@@ -41,7 +41,7 @@ export class UnitDesignerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let term = window.localStorage.getItem('search') || 'SM.00.00.00';
+    let term = window.localStorage.getItem('search') || '';
     this.searchInputCtrl.setValue(term);
     this.search();
   }
@@ -51,22 +51,10 @@ export class UnitDesignerComponent implements OnInit {
   }
 
   search() {
-    const term = this.searchInputCtrl.value || '';
+    const term = this.searchInputCtrl.value || '(.)';
     window.localStorage.setItem('search', term);
-    this.foundUnits$ = this.unitService.findAllMatchingUnits$(term).pipe(
-      take(1),
-      catchError((err) => {
-        return [];
-      }),
-      map((res) => {
-        console.log(res);
-        return res as Array<IUnitJson>;
-      }),
-      map((res) => {
-        return res.map((u) => new UnitEditor(u));
-      }),
-      share() // PLACE THIS LAST SO MULTIPLE THINGS ON TEMPLATE ALL GET SAME OBSERVABLE...
-    );
+    if (term == '(.)') window.localStorage.setItem('search', '');
+    this.foundUnits$ = this.unitService.findAllMatchingUnits$(term);
   }
 
   createNewUnit() {

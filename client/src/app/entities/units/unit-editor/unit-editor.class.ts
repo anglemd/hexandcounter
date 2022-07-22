@@ -1,3 +1,4 @@
+import { UnitDesignerService } from 'src/app/services/design/unit-designer.service';
 import { FactionEnum } from '../../factions/faction.enum';
 import { ColorEnum } from '../../rendering/color.enum';
 import { UnitMovementTypesEnum } from '../unit-movement-type.enum';
@@ -24,7 +25,7 @@ export class UnitEditor {
   public sideEditors: UnitSideEditor[] = [];
   public unitAppearanceEditor: UnitAppearanceEditor;
 
-  constructor(private _json: IUnitJson) {
+  constructor(private _json: IUnitJson, private unitDesignerService: UnitDesignerService) {
     if (!_json) _json = { markerId: '' };
     if (!_json.markerId) _json.markerId = '';
     this.json = JSON.parse(JSON.stringify(_json));
@@ -68,7 +69,10 @@ export class UnitEditor {
 
   private syncSideEditors() {
     if (!this._json._id && this._json.markerId) {
-      this.incrementMarkerId();
+      let nextAvailMarkerId = this.unitDesignerService.getNextAvailableMarkerId(this.markerId);
+      console.log(nextAvailMarkerId);
+      this.markerId = nextAvailMarkerId;
+      // this.incrementMarkerId();
     }
 
     if (this.json.unitType == UnitTypeEnum.HQ) this.sideCount = 2;
